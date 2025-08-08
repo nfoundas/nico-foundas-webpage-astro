@@ -1,0 +1,234 @@
+---
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+
+export interface Props {
+  title: string;
+  issuer: string;
+  date: string;
+  description?: string;
+  credentialId?: string;
+  verificationUrl?: string;
+  class?: string;
+}
+
+const { 
+  title,
+  issuer,
+  date,
+  description,
+  credentialId,
+  verificationUrl,
+  class: className = ''
+} = Astro.props;
+---
+
+<Card class={`certificate-card ${className}`}>
+  <div class="certificate-header">
+    <div class="certificate-icon">
+      <Icon name="award" size="lg" ariaLabel="Certificate" />
+    </div>
+    <div class="certificate-meta">
+      <h3 class="certificate-title">{title}</h3>
+      <p class="certificate-issuer">{issuer}</p>
+      <p class="certificate-date">{date}</p>
+    </div>
+  </div>
+  
+  {description && (
+    <div class="certificate-description">
+      <p>{description}</p>
+    </div>
+  )}
+  
+  <div class="certificate-footer">
+    {credentialId && (
+      <div class="credential-info">
+        <span class="credential-label">Credential ID:</span>
+        <span class="credential-id">{credentialId}</span>
+      </div>
+    )}
+    
+    {verificationUrl && (
+      <a 
+        href={verificationUrl}
+        class="verification-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Verify ${title} certificate`}
+      >
+        <Icon name="external-link" size="sm" />
+        <span>Verify</span>
+      </a>
+    )}
+  </div>
+</Card>
+
+<style>
+  .certificate-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+  }
+  
+  .certificate-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .certificate-icon {
+    flex-shrink: 0;
+    color: var(--color-primary);
+    padding: 0.5rem;
+    background: rgba(232, 180, 184, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .certificate-meta {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .certificate-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 0.25rem 0;
+    line-height: 1.3;
+  }
+  
+  .certificate-issuer {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin: 0 0 0.25rem 0;
+  }
+  
+  .certificate-date {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  
+  .certificate-description {
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+  
+  .certificate-description p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+  
+  .certificate-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+  
+  .credential-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .credential-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+  }
+  
+  .credential-id {
+    font-size: 0.8rem;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    color: var(--color-text-secondary);
+    word-break: break-all;
+  }
+  
+  .verification-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  
+  .verification-link:hover {
+    background: var(--color-hover);
+    transform: translateY(-1px);
+  }
+  
+  .verification-link:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+  
+  /* Card hover effects */
+  .certificate-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--color-shadow);
+  }
+  
+  .certificate-card:hover .certificate-icon {
+    background: rgba(232, 180, 184, 0.2);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .certificate-footer {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+    
+    .verification-link {
+      justify-content: center;
+    }
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .certificate-card,
+    .verification-link {
+      transition: none;
+    }
+    
+    .certificate-card:hover,
+    .verification-link:hover {
+      transform: none;
+    }
+  }
+  
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .certificate-icon {
+      background: var(--color-surface);
+      border: 2px solid var(--color-primary);
+    }
+    
+    .verification-link {
+      border: 2px solid var(--color-primary);
+    }
+  }
+</style>

@@ -1,0 +1,499 @@
+---
+import CertificateCard from '../certificates/CertificateCard.astro';
+import Icon from '../ui/Icon.astro';
+import { t } from '../../i18n';
+
+export interface Props {
+  lang?: 'en' | 'de';
+}
+
+const { lang = 'en' } = Astro.props;
+
+// Mock certificate data - replace with real data
+const certificates = [
+  {
+    title: 'AWS Certified Solutions Architect',
+    issuer: 'Amazon Web Services',
+    date: '2023',
+    description: 'Professional certification demonstrating expertise in designing distributed systems on AWS.',
+    credentialId: 'AWS-SAA-123456',
+    verificationUrl: 'https://aws.amazon.com/verification'
+  },
+  {
+    title: 'Certified Kubernetes Administrator',
+    issuer: 'Cloud Native Computing Foundation',
+    date: '2023',
+    description: 'Certification validating skills in Kubernetes cluster administration and management.',
+    credentialId: 'CKA-789012',
+    verificationUrl: 'https://training.linuxfoundation.org/certification/verify'
+  },
+  {
+    title: 'Professional Scrum Master I',
+    issuer: 'Scrum.org',
+    date: '2022',
+    description: 'Certification demonstrating understanding of Scrum framework and agile principles.',
+    credentialId: 'PSM-345678',
+    verificationUrl: 'https://scrum.org/certificates'
+  },
+  {
+    title: 'Google Cloud Professional Developer',
+    issuer: 'Google Cloud',
+    date: '2022',
+    description: 'Professional certification for designing and building scalable applications on Google Cloud.',
+    credentialId: 'GCP-DEV-901234',
+    verificationUrl: 'https://cloud.google.com/certification'
+  }
+];
+---
+
+<section 
+  class="certificates-section" 
+  id="certificates"
+  aria-labelledby="certificates-title"
+>
+  <div class="container">
+    <div class="section-header">
+      <h2 id="certificates-title" class="section-title">
+        {t('certificates.title', lang)}
+      </h2>
+      <p class="section-description">
+        {t('certificates.description', lang)}
+      </p>
+    </div>
+    
+    <div class="carousel-container">
+      <div class="carousel-wrapper">
+        <button 
+          class="carousel-button carousel-button--prev"
+          aria-label="Previous certificate"
+          id="prev-button"
+        >
+          <Icon name="chevronLeft" size="md" />
+        </button>
+        
+        <div class="carousel-track-container">
+          <div class="carousel-track" id="carousel-track">
+            {certificates.map((cert, index) => (
+              <div 
+                class="carousel-slide"
+                data-index={index}
+                aria-hidden={index > 0 ? 'true' : 'false'}
+              >
+                <CertificateCard
+                  title={cert.title}
+                  issuer={cert.issuer}
+                  date={cert.date}
+                  description={cert.description}
+                  credentialId={cert.credentialId}
+                  verificationUrl={cert.verificationUrl}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <button 
+          class="carousel-button carousel-button--next"
+          aria-label="Next certificate"
+          id="next-button"
+        >
+          <Icon name="chevronRight" size="md" />
+        </button>
+      </div>
+      
+      <div class="carousel-indicators" role="tablist" aria-label="Certificate navigation">
+        {certificates.map((_, index) => (
+          <button
+            class={`carousel-indicator ${index === 0 ? 'active' : ''}`}
+            role="tab"
+            aria-selected={index === 0 ? 'true' : 'false'}
+            aria-label={`Go to certificate ${index + 1}`}
+            data-index={index}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  function initCertificatesCarousel() {
+    const track = document.getElementById('carousel-track');
+    const slides = track?.querySelectorAll('.carousel-slide');
+    const nextButton = document.getElementById('next-button');
+    const prevButton = document.getElementById('prev-button');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    
+    if (!track || !slides || !nextButton || !prevButton) return;
+    
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    let autoPlayInterval;
+    
+    function updateCarousel() {
+      // Update slides
+      slides.forEach((slide, index) => {
+        slide.style.transform = `translateX(${(index - currentSlide) * 100}%)`;
+        slide.setAttribute('aria-hidden', index === currentSlide ? 'false' : 'true');
+      });
+      
+      // Update indicators
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+        indicator.setAttribute('aria-selected', index === currentSlide ? 'true' : 'false');
+      });
+      
+      // Update button states
+      prevButton.disabled = currentSlide === 0;
+      nextButton.disabled = currentSlide === totalSlides - 1;
+    }
+    
+    function goToSlide(index) {
+      currentSlide = Math.max(0, Math.min(index, totalSlides - 1));
+      updateCarousel();
+      restartAutoPlay();
+    }
+    
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        goToSlide(currentSlide + 1);
+      } else {
+        goToSlide(0); // Loop back to first slide
+      }
+    }
+    
+    function prevSlide() {
+      if (currentSlide > 0) {
+        goToSlide(currentSlide - 1);
+      } else {
+        goToSlide(totalSlides - 1); // Loop to last slide
+      }
+    }
+    
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(nextSlide, 5000);
+    }
+    
+    function stopAutoPlay() {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+      }
+    }
+    
+    function restartAutoPlay() {
+      stopAutoPlay();
+      startAutoPlay();
+    }
+    
+    // Event listeners
+    nextButton.addEventListener('click', nextSlide);
+    prevButton.addEventListener('click', prevSlide);
+    
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => goToSlide(index));
+    });
+    
+    // Keyboard navigation
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextSlide();
+      }
+    });
+    
+    // Pause auto-play on hover
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+      carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+      carouselContainer.addEventListener('mouseleave', startAutoPlay);
+    }
+    
+    // Pause auto-play when page is not visible
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAutoPlay();
+      } else {
+        startAutoPlay();
+      }
+    });
+    
+    // Touch/swipe support
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+    
+    track.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+      stopAutoPlay();
+    });
+    
+    track.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX;
+    });
+    
+    track.addEventListener('touchend', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      
+      const diffX = startX - currentX;
+      const threshold = 50;
+      
+      if (Math.abs(diffX) > threshold) {
+        if (diffX > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+      
+      startAutoPlay();
+    });
+    
+    // Initialize
+    updateCarousel();
+    startAutoPlay();
+    
+    // Update content on language change
+    window.addEventListener('languageChange', (e) => {
+      const lang = e.detail;
+      const translations = {
+        en: {
+          title: 'Certificates',
+          description: 'Professional certifications and achievements that validate my expertise.'
+        },
+        de: {
+          title: 'Zertifikate',
+          description: 'Professionelle Zertifizierungen und Erfolge, die meine Expertise bestätigen.'
+        }
+      };
+      
+      const currentTranslations = translations[lang] || translations.en;
+      
+      const sectionTitle = document.getElementById('certificates-title');
+      const sectionDescription = document.querySelector('.certificates-section .section-description');
+      
+      if (sectionTitle) sectionTitle.textContent = currentTranslations.title;
+      if (sectionDescription) sectionDescription.textContent = currentTranslations.description;
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', initCertificatesCarousel);
+</script>
+
+<style>
+  .certificates-section {
+    padding: 5rem 0;
+    background: var(--color-surface);
+    position: relative;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 1rem 0;
+    position: relative;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: 2px;
+  }
+  
+  .section-description {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .carousel-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .carousel-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .carousel-track-container {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  
+  .carousel-track {
+    display: flex;
+    transition: transform 0.3s ease;
+    height: 400px;
+  }
+  
+  .carousel-slide {
+    min-width: 100%;
+    display: flex;
+    align-items: stretch;
+  }
+  
+  .carousel-button {
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  
+  .carousel-button:hover:not(:disabled) {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    transform: scale(1.05);
+  }
+  
+  .carousel-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .carousel-button:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+  
+  .carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-border);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .carousel-indicator.active {
+    background: var(--color-primary);
+    transform: scale(1.2);
+  }
+  
+  .carousel-indicator:hover {
+    background: var(--color-primary);
+  }
+  
+  .carousel-indicator:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 767px) {
+    .certificates-section {
+      padding: 3rem 0;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .carousel-wrapper {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .carousel-button {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .carousel-track {
+      height: auto;
+      min-height: 350px;
+    }
+    
+    .carousel-button--prev,
+    .carousel-button--next {
+      order: 1;
+    }
+    
+    .carousel-track-container {
+      order: 0;
+    }
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+      transition: none;
+    }
+    
+    .carousel-button,
+    .carousel-indicator {
+      transition: none;
+    }
+    
+    .carousel-button:hover:not(:disabled) {
+      transform: none;
+    }
+    
+    .carousel-indicator.active {
+      transform: none;
+    }
+  }
+  
+  /* Print styles */
+  @media print {
+    .certificates-section {
+      padding: 2rem 0;
+    }
+    
+    .carousel-button,
+    .carousel-indicators {
+      display: none;
+    }
+    
+    .carousel-track {
+      display: block;
+      height: auto;
+    }
+    
+    .carousel-slide {
+      min-width: auto;
+      page-break-inside: avoid;
+      margin-bottom: 2rem;
+    }
+  }
+</style>
