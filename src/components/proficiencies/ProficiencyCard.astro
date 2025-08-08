@@ -1,0 +1,132 @@
+---
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  skills: string[];
+  icon: string;
+  class?: string;
+}
+
+const { 
+  title,
+  description,
+  skills,
+  icon,
+  class: className = ''
+} = Astro.props;
+---
+
+<Card class={`proficiency-card ${className}`}>
+  <div class="proficiency-header">
+    <div class="proficiency-icon">
+      <Icon name={icon} size="xl" ariaLabel={title} />
+    </div>
+    <h3 class="proficiency-title">{title}</h3>
+  </div>
+  
+  <p class="proficiency-description">{description}</p>
+  
+  <div class="proficiency-skills">
+    <h4 class="skills-title sr-only">Key Skills</h4>
+    <ul class="skills-list" role="list">
+      {skills.map(skill => (
+        <li class="skill-item">{skill}</li>
+      ))}
+    </ul>
+  </div>
+</Card>
+
+<style>
+  .proficiency-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .proficiency-header {
+    margin-bottom: 1rem;
+  }
+  
+  .proficiency-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+  
+  .proficiency-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 1rem 0;
+  }
+  
+  .proficiency-description {
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    line-height: 1.6;
+  }
+  
+  .proficiency-skills {
+    margin-top: auto;
+  }
+  
+  .skills-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .skill-item {
+    background: rgba(232, 180, 184, 0.1);
+    color: var(--color-text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid rgba(232, 180, 184, 0.2);
+    transition: all 0.2s ease;
+  }
+  
+  .proficiency-card:hover .skill-item {
+    background: rgba(232, 180, 184, 0.15);
+    border-color: rgba(232, 180, 184, 0.3);
+  }
+  
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    .skills-list {
+      gap: 0.75rem;
+    }
+    
+    .skill-item {
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
+    }
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .proficiency-card,
+    .skill-item {
+      transition: none;
+    }
+  }
+  
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .skill-item {
+      background: var(--color-surface);
+      border: 2px solid var(--color-primary);
+    }
+  }
+</style>

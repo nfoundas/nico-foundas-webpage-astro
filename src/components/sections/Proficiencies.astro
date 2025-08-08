@@ -1,0 +1,281 @@
+---
+import ProficiencyCard from '../proficiencies/ProficiencyCard.astro';
+import { t } from '../../i18n';
+
+export interface Props {
+  lang?: 'en' | 'de';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const getSkillsArray = (key: string, lang: 'en' | 'de'): string[] => {
+  const skills = t(key, lang);
+  return Array.isArray(skills) ? skills : [];
+};
+
+const proficiencies = [
+  {
+    title: t('proficiencies.development.title', lang),
+    description: t('proficiencies.development.description', lang),
+    skills: getSkillsArray('proficiencies.development.skills', lang),
+    icon: 'code'
+  },
+  {
+    title: t('proficiencies.projectManagement.title', lang),
+    description: t('proficiencies.projectManagement.description', lang),
+    skills: getSkillsArray('proficiencies.projectManagement.skills', lang),
+    icon: 'users'
+  },
+  {
+    title: t('proficiencies.devOps.title', lang),
+    description: t('proficiencies.devOps.description', lang),
+    skills: getSkillsArray('proficiencies.devOps.skills', lang),
+    icon: 'server'
+  }
+];
+---
+
+<section 
+  class="proficiencies-section" 
+  id="proficiencies"
+  aria-labelledby="proficiencies-title"
+>
+  <div class="container">
+    <div class="section-header">
+      <h2 id="proficiencies-title" class="section-title">
+        {t('proficiencies.title', lang)}
+      </h2>
+    </div>
+    
+    <div class="proficiencies-grid">
+      {proficiencies.map((proficiency, index) => (
+        <div 
+          class="proficiency-item animate-fade-in-up"
+          style={`animation-delay: ${index * 0.2}s`}
+        >
+          <ProficiencyCard
+            title={proficiency.title}
+            description={proficiency.description}
+            skills={proficiency.skills}
+            icon={proficiency.icon}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  function initProficienciesSection() {
+    // Update content on language change
+    window.addEventListener('languageChange', (e) => {
+      const lang = e.detail;
+      const translations = {
+        en: {
+          title: 'Proficiencies',
+          development: {
+            title: 'Development',
+            description: 'Full-stack development with modern technologies and best practices.',
+            skills: ['JavaScript/TypeScript', 'React/Vue/Angular', 'Node.js', 'Python', 'Database Design']
+          },
+          projectManagement: {
+            title: 'Project Management',
+            description: 'Agile methodologies and team leadership for successful project delivery.',
+            skills: ['Scrum/Kanban', 'Team Leadership', 'Stakeholder Management', 'Risk Assessment', 'Quality Assurance']
+          },
+          devOps: {
+            title: 'DevOps',
+            description: 'Infrastructure automation and continuous integration/deployment.',
+            skills: ['Docker/Kubernetes', 'CI/CD Pipelines', 'Cloud Platforms', 'Monitoring', 'Security']
+          }
+        },
+        de: {
+          title: 'Kompetenzen',
+          development: {
+            title: 'Entwicklung',
+            description: 'Full-Stack-Entwicklung mit modernen Technologien und bewährten Praktiken.',
+            skills: ['JavaScript/TypeScript', 'React/Vue/Angular', 'Node.js', 'Python', 'Datenbankdesign']
+          },
+          projectManagement: {
+            title: 'Projektmanagement',
+            description: 'Agile Methoden und Teamführung für erfolgreiche Projektabwicklung.',
+            skills: ['Scrum/Kanban', 'Teamführung', 'Stakeholder-Management', 'Risikobewertung', 'Qualitätssicherung']
+          },
+          devOps: {
+            title: 'DevOps',
+            description: 'Infrastruktur-Automatisierung und kontinuierliche Integration/Bereitstellung.',
+            skills: ['Docker/Kubernetes', 'CI/CD-Pipelines', 'Cloud-Plattformen', 'Monitoring', 'Sicherheit']
+          }
+        }
+      };
+      
+      const currentTranslations = translations[lang] || translations.en;
+      
+      // Update section title
+      const sectionTitle = document.getElementById('proficiencies-title');
+      if (sectionTitle) {
+        sectionTitle.textContent = currentTranslations.title;
+      }
+      
+      // Update proficiency cards
+      const proficiencyItems = document.querySelectorAll('.proficiency-item');
+      const proficiencyData = [
+        currentTranslations.development,
+        currentTranslations.projectManagement,
+        currentTranslations.devOps
+      ];
+      
+      proficiencyItems.forEach((item, index) => {
+        const data = proficiencyData[index];
+        if (!data) return;
+        
+        const title = item.querySelector('.proficiency-title');
+        const description = item.querySelector('.proficiency-description');
+        const skillItems = item.querySelectorAll('.skill-item');
+        
+        if (title) title.textContent = data.title;
+        if (description) description.textContent = data.description;
+        
+        skillItems.forEach((skillItem, skillIndex) => {
+          if (data.skills[skillIndex]) {
+            skillItem.textContent = data.skills[skillIndex];
+          }
+        });
+      });
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', initProficienciesSection);
+</script>
+
+<style>
+  .proficiencies-section {
+    padding: 5rem 0;
+    background: var(--color-background);
+    position: relative;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+    position: relative;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: 2px;
+  }
+  
+  .proficiencies-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .proficiency-item {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  /* Grid responsive breakpoints */
+  @media (min-width: 768px) {
+    .proficiencies-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+    }
+    
+    .proficiency-item:nth-child(3) {
+      grid-column: 1 / -1;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .proficiencies-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+    
+    .proficiency-item:nth-child(3) {
+      grid-column: auto;
+      max-width: none;
+      margin: 0;
+    }
+  }
+  
+  /* Animation */
+  .proficiency-item.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  /* Intersection Observer for scroll animations */
+  .proficiency-item.in-view {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.6s ease-out;
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .section-title::after {
+      animation: none;
+    }
+    
+    .proficiency-item {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+    
+    .proficiency-item.in-view {
+      transition: none;
+    }
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 767px) {
+    .proficiencies-section {
+      padding: 3rem 0;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .proficiencies-grid {
+      gap: 1.5rem;
+    }
+  }
+  
+  /* Print styles */
+  @media print {
+    .proficiencies-section {
+      padding: 2rem 0;
+      break-inside: avoid;
+    }
+    
+    .proficiency-item {
+      opacity: 1;
+      transform: none;
+      break-inside: avoid;
+      margin-bottom: 1rem;
+    }
+  }
+</style>
