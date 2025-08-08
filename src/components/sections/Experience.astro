@@ -1,0 +1,349 @@
+---
+import ExperienceCard from '../experience/ExperienceCard.astro';
+import { t } from '../../i18n';
+
+export interface Props {
+  lang?: 'en' | 'de';
+}
+
+const { lang = 'en' } = Astro.props;
+
+// Mock experience data - replace with real data
+const experiences = [
+  {
+    title: 'Senior Full-Stack Developer',
+    company: 'TechCorp Solutions',
+    period: '2022 - Present',
+    description: 'Leading development of enterprise web applications using modern JavaScript frameworks and cloud technologies. Responsible for architecture decisions and mentoring junior developers.',
+    technologies: ['React', 'Node.js', 'TypeScript', 'AWS', 'Docker', 'PostgreSQL'],
+    achievements: [
+      'Reduced application load time by 40% through performance optimization',
+      'Led migration to microservices architecture serving 100k+ users',
+      'Mentored 5 junior developers and established code review processes'
+    ]
+  },
+  {
+    title: 'Project Manager & Developer',
+    company: 'Digital Innovations Ltd',
+    period: '2020 - 2022',
+    description: 'Managed cross-functional teams while contributing to development. Implemented agile methodologies and improved project delivery timelines by 30%.',
+    technologies: ['Vue.js', 'Python', 'Django', 'MySQL', 'Jenkins', 'Kubernetes'],
+    achievements: [
+      'Successfully delivered 12 projects on time and within budget',
+      'Implemented CI/CD pipeline reducing deployment time by 60%',
+      'Improved team productivity through agile transformation'
+    ]
+  },
+  {
+    title: 'Full-Stack Developer',
+    company: 'StartupHub Inc',
+    period: '2018 - 2020',
+    description: 'Developed and maintained multiple client applications from concept to deployment. Worked directly with clients to understand requirements and deliver solutions.',
+    technologies: ['Angular', 'Express.js', 'MongoDB', 'Redis', 'Git', 'Linux'],
+    achievements: [
+      'Built 8 client applications from scratch',
+      'Achieved 99.9% uptime across all deployed applications',
+      'Established automated testing practices increasing code quality'
+    ]
+  },
+  {
+    title: 'Junior Software Developer',
+    company: 'CodeCraft Agency',
+    period: '2016 - 2018',
+    description: 'Started career developing web applications and learning modern development practices. Contributed to various client projects and internal tools.',
+    technologies: ['JavaScript', 'PHP', 'Laravel', 'MySQL', 'HTML/CSS', 'jQuery'],
+    achievements: [
+      'Completed 15+ client projects successfully',
+      'Learned and applied modern development frameworks',
+      'Contributed to open-source projects and internal tools'
+    ]
+  }
+];
+---
+
+<section 
+  class="experience-section" 
+  id="experience"
+  aria-labelledby="experience-title"
+>
+  <div class="container">
+    <div class="section-header">
+      <h2 id="experience-title" class="section-title">
+        {t('experience.title', lang)}
+      </h2>
+      <p class="section-description">
+        {t('experience.description', lang)}
+      </p>
+    </div>
+    
+    <div class="timeline-container">
+      <div class="timeline-line" aria-hidden="true"></div>
+      
+      <div class="timeline-content">
+        {experiences.map((exp, index) => (
+          <div 
+            class={`timeline-item animate-fade-in-up ${index % 2 === 0 ? 'timeline-item--left' : 'timeline-item--right'}`}
+            style={`animation-delay: ${index * 0.2}s`}
+          >
+            <ExperienceCard
+              title={exp.title}
+              company={exp.company}
+              period={exp.period}
+              description={exp.description}
+              technologies={exp.technologies}
+              achievements={exp.achievements}
+              isLeft={index % 2 === 0}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  function initExperienceSection() {
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, observerOptions);
+    
+    // Observe timeline items
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    timelineItems.forEach(item => {
+      observer.observe(item);
+    });
+    
+    // Update content on language change
+    window.addEventListener('languageChange', (e) => {
+      const lang = e.detail;
+      const translations = {
+        en: {
+          title: 'Experience',
+          description: 'My professional journey and key projects that shaped my expertise in software development.'
+        },
+        de: {
+          title: 'Erfahrung',
+          description: 'Mein beruflicher Werdegang und wichtige Projekte, die meine Expertise in der Softwareentwicklung geprägt haben.'
+        }
+      };
+      
+      const currentTranslations = translations[lang] || translations.en;
+      
+      const sectionTitle = document.getElementById('experience-title');
+      const sectionDescription = document.querySelector('.experience-section .section-description');
+      
+      if (sectionTitle) sectionTitle.textContent = currentTranslations.title;
+      if (sectionDescription) sectionDescription.textContent = currentTranslations.description;
+      
+      // Update achievement titles
+      const achievementTitles = document.querySelectorAll('.achievements-title');
+      const achievementText = lang === 'de' ? 'Wichtige Erfolge' : 'Key Achievements';
+      achievementTitles.forEach(title => {
+        title.textContent = achievementText;
+      });
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', initExperienceSection);
+</script>
+
+<style>
+  .experience-section {
+    padding: 5rem 0;
+    background: var(--color-background);
+    position: relative;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 1rem 0;
+    position: relative;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: 2px;
+  }
+  
+  .section-description {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .timeline-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+  
+  .timeline-content {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .timeline-item {
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+  
+  .timeline-item.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .timeline-item--left {
+    padding-right: calc(50% + 40px);
+  }
+  
+  .timeline-item--right {
+    padding-left: calc(50% + 40px);
+  }
+  
+  /* Animation keyframes */
+  .timeline-item.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Mobile layout */
+  @media (max-width: 767px) {
+    .experience-section {
+      padding: 3rem 0;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .section-header {
+      margin-bottom: 3rem;
+    }
+    
+    .timeline-line {
+      left: 20px;
+    }
+    
+    .timeline-item--left,
+    .timeline-item--right {
+      padding-left: 60px;
+      padding-right: 0;
+    }
+    
+    .timeline-item {
+      margin-bottom: 3rem;
+    }
+  }
+  
+  /* Tablet adjustments */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .timeline-container {
+      max-width: 900px;
+    }
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .timeline-item {
+      opacity: 1;
+      transform: none;
+      animation: none;
+      transition: none;
+    }
+    
+    .timeline-item.animate-fade-in-up {
+      animation: none;
+    }
+    
+    .timeline-item.in-view {
+      transition: none;
+    }
+  }
+  
+  /* Print styles */
+  @media print {
+    .experience-section {
+      padding: 2rem 0;
+    }
+    
+    .timeline-line {
+      display: none;
+    }
+    
+    .timeline-item {
+      opacity: 1;
+      transform: none;
+      margin-bottom: 2rem;
+      padding: 0 !important;
+      break-inside: avoid;
+    }
+    
+    .timeline-item--left,
+    .timeline-item--right {
+      padding: 0 !important;
+    }
+  }
+  
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .timeline-line {
+      background: var(--color-primary);
+    }
+  }
+  
+  /* Focus management for accessibility */
+  .timeline-item:focus-within {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+</style>

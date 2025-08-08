@@ -1,0 +1,630 @@
+---
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import { t } from '../../i18n';
+
+export interface Props {
+  lang?: 'en' | 'de';
+}
+
+const { lang = 'en' } = Astro.props;
+---
+
+<section 
+  class="contact-section" 
+  id="contact"
+  aria-labelledby="contact-title"
+>
+  <div class="container">
+    <div class="section-header">
+      <h2 id="contact-title" class="section-title">
+        {t('contact.title', lang)}
+      </h2>
+      <p class="section-description">
+        {t('contact.description', lang)}
+      </p>
+    </div>
+    
+    <div class="contact-content">
+      <div class="contact-info">
+        <h3 class="contact-info-title">{t('contact.getInTouch', lang)}</h3>
+        <p class="contact-info-text">
+          {t('contact.infoText', lang)}
+        </p>
+        
+        <div class="contact-methods">
+          <div class="contact-method">
+            <div class="contact-method-icon">
+              <Icon name="email" size="md" ariaLabel="Email" />
+            </div>
+            <div class="contact-method-content">
+              <h4 class="contact-method-title">{t('contact.email', lang)}</h4>
+              <a href="mailto:nico.foundas@example.com" class="contact-method-link">
+                nico.foundas@example.com
+              </a>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <div class="contact-method-icon">
+              <Icon name="phone" size="md" ariaLabel="Phone" />
+            </div>
+            <div class="contact-method-content">
+              <h4 class="contact-method-title">{t('contact.phone', lang)}</h4>
+              <a href="tel:+491234567890" class="contact-method-link">
+                +49 123 456 7890
+              </a>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <div class="contact-method-icon">
+              <Icon name="linkedin" size="md" ariaLabel="LinkedIn" />
+            </div>
+            <div class="contact-method-content">
+              <h4 class="contact-method-title">LinkedIn</h4>
+              <a 
+                href="https://linkedin.com/in/nico-foundas" 
+                class="contact-method-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                linkedin.com/in/nico-foundas
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-form-container">
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-group">
+            <label for="name" class="form-label">
+              {t('contact.form.name', lang)}
+              <span class="required" aria-label="required">*</span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-input"
+              required
+              aria-describedby="name-error"
+              autocomplete="name"
+            />
+            <div id="name-error" class="form-error" role="alert" aria-live="polite"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="form-label">
+              {t('contact.form.email', lang)}
+              <span class="required" aria-label="required">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              required
+              aria-describedby="email-error"
+              autocomplete="email"
+            />
+            <div id="email-error" class="form-error" role="alert" aria-live="polite"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="message" class="form-label">
+              {t('contact.form.message', lang)}
+              <span class="required" aria-label="required">*</span>
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              class="form-textarea"
+              rows="6"
+              required
+              aria-describedby="message-error"
+            ></textarea>
+            <div id="message-error" class="form-error" role="alert" aria-live="polite"></div>
+          </div>
+          
+          <div class="form-actions">
+            <Button 
+              type="submit" 
+              variant="primary" 
+              class="submit-button"
+            >
+              <Icon name="email" size="sm" />
+              <span class="submit-text">{t('contact.form.submit', lang)}</span>
+            </Button>
+          </div>
+          
+          <div id="form-status" class="form-status" role="alert" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  function initContactSection() {
+    const form = document.getElementById('contact-form');
+    const submitButton = form?.querySelector('.submit-button');
+    const submitText = form?.querySelector('.submit-text');
+    const formStatus = document.getElementById('form-status');
+    
+    if (!form || !submitButton || !submitText || !formStatus) return;
+    
+    // Form validation
+    function validateField(field) {
+      const value = field.value.trim();
+      const errorElement = document.getElementById(`${field.name}-error`);
+      let isValid = true;
+      let errorMessage = '';
+      
+      // Clear previous error
+      errorElement.textContent = '';
+      field.classList.remove('error');
+      
+      // Required field validation
+      if (!value) {
+        errorMessage = field.name === 'name' ? 'Name is required' : 
+                     field.name === 'email' ? 'Email is required' : 
+                     'Message is required';
+        isValid = false;
+      }
+      // Email validation
+      else if (field.type === 'email') {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          errorMessage = 'Please enter a valid email address';
+          isValid = false;
+        }
+      }
+      // Message length validation
+      else if (field.name === 'message' && value.length < 10) {
+        errorMessage = 'Message must be at least 10 characters long';
+        isValid = false;
+      }
+      
+      if (!isValid) {
+        errorElement.textContent = errorMessage;
+        field.classList.add('error');
+      }
+      
+      return isValid;
+    }
+    
+    function validateForm() {
+      const fields = form.querySelectorAll('input[required], textarea[required]');
+      let isFormValid = true;
+      
+      fields.forEach(field => {
+        if (!validateField(field)) {
+          isFormValid = false;
+        }
+      });
+      
+      return isFormValid;
+    }
+    
+    // Real-time validation
+    const formFields = form.querySelectorAll('input, textarea');
+    formFields.forEach(field => {
+      field.addEventListener('blur', () => validateField(field));
+      field.addEventListener('input', () => {
+        if (field.classList.contains('error')) {
+          validateField(field);
+        }
+      });
+    });
+    
+    // Form submission
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (!validateForm()) {
+        formStatus.textContent = 'Please correct the errors above.';
+        formStatus.className = 'form-status form-status--error';
+        return;
+      }
+      
+      // Show loading state
+      submitButton.disabled = true;
+      submitText.textContent = 'Sending...';
+      formStatus.textContent = '';
+      formStatus.className = 'form-status';
+      
+      try {
+        // Simulate form submission (replace with actual endpoint)
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // Success state
+        formStatus.textContent = 'Thank you! Your message has been sent successfully.';
+        formStatus.className = 'form-status form-status--success';
+        form.reset();
+        
+        // Reset button after delay
+        setTimeout(() => {
+          submitButton.disabled = false;
+          submitText.textContent = 'Send Message';
+        }, 3000);
+        
+      } catch (error) {
+        // Error state
+        formStatus.textContent = 'Sorry, there was an error sending your message. Please try again.';
+        formStatus.className = 'form-status form-status--error';
+        
+        submitButton.disabled = false;
+        submitText.textContent = 'Send Message';
+      }
+    });
+    
+    // Update content on language change
+    window.addEventListener('languageChange', (e) => {
+      const lang = e.detail;
+      const translations = {
+        en: {
+          title: 'Contact',
+          description: 'Ready to start your next project? Let\'s discuss how I can help bring your ideas to life.',
+          getInTouch: 'Get in Touch',
+          infoText: 'I\'m always interested in new opportunities and exciting projects. Feel free to reach out!',
+          email: 'Email',
+          phone: 'Phone',
+          form: {
+            name: 'Your Name',
+            email: 'Email Address',
+            message: 'Your Message',
+            submit: 'Send Message'
+          }
+        },
+        de: {
+          title: 'Kontakt',
+          description: 'Bereit für Ihr nächstes Projekt? Lassen Sie uns besprechen, wie ich Ihnen helfen kann, Ihre Ideen zum Leben zu erwecken.',
+          getInTouch: 'Kontakt aufnehmen',
+          infoText: 'Ich bin immer an neuen Möglichkeiten und spannenden Projekten interessiert. Zögern Sie nicht, mich zu kontaktieren!',
+          email: 'E-Mail',
+          phone: 'Telefon',
+          form: {
+            name: 'Ihr Name',
+            email: 'E-Mail-Adresse',
+            message: 'Ihre Nachricht',
+            submit: 'Nachricht senden'
+          }
+        }
+      };
+      
+      const currentTranslations = translations[lang] || translations.en;
+      
+      // Update section content
+      const sectionTitle = document.getElementById('contact-title');
+      const sectionDescription = document.querySelector('.contact-section .section-description');
+      const contactInfoTitle = document.querySelector('.contact-info-title');
+      const contactInfoText = document.querySelector('.contact-info-text');
+      
+      if (sectionTitle) sectionTitle.textContent = currentTranslations.title;
+      if (sectionDescription) sectionDescription.textContent = currentTranslations.description;
+      if (contactInfoTitle) contactInfoTitle.textContent = currentTranslations.getInTouch;
+      if (contactInfoText) contactInfoText.textContent = currentTranslations.infoText;
+      
+      // Update contact method titles
+      const methodTitles = document.querySelectorAll('.contact-method-title');
+      const methodTexts = [currentTranslations.email, currentTranslations.phone, 'LinkedIn'];
+      methodTitles.forEach((title, index) => {
+        if (methodTexts[index]) {
+          title.textContent = methodTexts[index];
+        }
+      });
+      
+      // Update form labels
+      const nameLabel = document.querySelector('label[for="name"]');
+      const emailLabel = document.querySelector('label[for="email"]');
+      const messageLabel = document.querySelector('label[for="message"]');
+      
+      if (nameLabel) {
+        nameLabel.innerHTML = `${currentTranslations.form.name} <span class="required" aria-label="required">*</span>`;
+      }
+      if (emailLabel) {
+        emailLabel.innerHTML = `${currentTranslations.form.email} <span class="required" aria-label="required">*</span>`;
+      }
+      if (messageLabel) {
+        messageLabel.innerHTML = `${currentTranslations.form.message} <span class="required" aria-label="required">*</span>`;
+      }
+      
+      // Update submit button
+      if (submitText && !submitButton.disabled) {
+        submitText.textContent = currentTranslations.form.submit;
+      }
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', initContactSection);
+</script>
+
+<style>
+  .contact-section {
+    padding: 5rem 0;
+    background: var(--color-surface);
+    position: relative;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 1rem 0;
+    position: relative;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: 2px;
+  }
+  
+  .section-description {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .contact-info {
+    background: var(--color-background);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+  }
+  
+  .contact-info-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 1rem 0;
+  }
+  
+  .contact-info-text {
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .contact-method-icon {
+    flex-shrink: 0;
+    color: var(--color-primary);
+    padding: 0.75rem;
+    background: rgba(232, 180, 184, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .contact-method-content {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .contact-method-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 0.25rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .contact-method-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    word-break: break-all;
+  }
+  
+  .contact-method-link:hover {
+    color: var(--color-hover);
+    text-decoration: underline;
+  }
+  
+  .contact-method-link:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  .contact-form-container {
+    background: var(--color-background);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+  }
+  
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-label {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    font-size: 0.9rem;
+  }
+  
+  .required {
+    color: var(--color-error);
+    margin-left: 0.25rem;
+  }
+  
+  .form-input,
+  .form-textarea {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    transition: all 0.2s ease;
+  }
+  
+  .form-input:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(232, 180, 184, 0.1);
+  }
+  
+  .form-input.error,
+  .form-textarea.error {
+    border-color: var(--color-error);
+  }
+  
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .form-error {
+    color: var(--color-error);
+    font-size: 0.875rem;
+    min-height: 1.25rem;
+  }
+  
+  .form-actions {
+    margin-top: 1rem;
+  }
+  
+  .submit-button {
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .form-status {
+    text-align: center;
+    font-weight: 500;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
+  
+  .form-status--success {
+    background: rgba(34, 197, 94, 0.1);
+    color: #059669;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+  
+  .form-status--error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+  
+  /* Desktop layout */
+  @media (min-width: 768px) {
+    .contact-content {
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+    }
+    
+    .submit-button {
+      width: auto;
+      align-self: flex-start;
+    }
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 767px) {
+    .contact-section {
+      padding: 3rem 0;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .contact-info,
+    .contact-form-container {
+      padding: 1.5rem;
+    }
+    
+    .contact-method {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.75rem;
+    }
+    
+    .contact-method-link {
+      word-break: break-word;
+    }
+  }
+  
+  /* Print styles */
+  @media print {
+    .contact-section {
+      padding: 2rem 0;
+    }
+    
+    .contact-form-container {
+      display: none;
+    }
+    
+    .contact-content {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .form-input,
+    .form-textarea {
+      border: 2px solid var(--color-text-primary);
+    }
+    
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px var(--color-primary);
+    }
+  }
+</style>
