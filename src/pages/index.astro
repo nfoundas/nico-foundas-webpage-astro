@@ -1,16 +1,161 @@
 ---
+import Layout from '../components/layout/Layout.astro';
+import About from '../components/sections/About.astro';
+import Proficiencies from '../components/sections/Proficiencies.astro';
+import Certificates from '../components/sections/Certificates.astro';
+import Experience from '../components/sections/Experience.astro';
+import Contact from '../components/sections/Contact.astro';
 
+// Get language from URL params or default to 'en'
+const url = new URL(Astro.request.url);
+const lang = (url.searchParams.get('lang') as 'en' | 'de') || 'en';
+
+// Page metadata
+const title = lang === 'de' ? 'Nico Foundas - Freiberuflicher Senior Software Engineer' : 'Nico Foundas - Freelance Senior Software Engineer';
+const description = lang === 'de' 
+  ? 'Leidenschaftlicher Software-Ingenieur mit Expertise in Full-Stack-Entwicklung, Projektmanagement und DevOps. Ich helfe Unternehmen dabei, skalierbare, moderne Anwendungen zu erstellen.'
+  : 'Passionate software engineer with expertise in full-stack development, project management, and DevOps. I help businesses build scalable, modern applications and optimize their development processes.';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout 
+  title={title}
+  description={description}
+  lang={lang}
+>
+  <main id="main-content">
+    <About lang={lang} />
+    <Proficiencies lang={lang} />
+    <Certificates lang={lang} />
+    <Experience lang={lang} />
+    <Contact lang={lang} />
+  </main>
+</Layout>
+
+<style>
+  main {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Ensure sections have proper spacing */
+  main > section {
+    position: relative;
+  }
+  
+  /* Add scroll margin for anchor navigation */
+  main > section {
+    scroll-margin-top: 80px;
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  
+  /* Print styles */
+  @media print {
+    main > section {
+      scroll-margin-top: 0;
+      page-break-inside: avoid;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Initialize page functionality
+  function initPage() {
+    // Handle language changes from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlLang = urlParams.get('lang');
+    
+    if (urlLang && (urlLang === 'en' || urlLang === 'de')) {
+      // Dispatch language change event for components
+      window.dispatchEvent(new CustomEvent('languageChange', { 
+        detail: urlLang 
+      }));
+    }
+    
+    // Smooth scroll enhancement for older browsers
+    if (!CSS.supports('scroll-behavior', 'smooth')) {
+      const links = document.querySelectorAll('a[href^="#"]');
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    }
+    
+    // Add loading states for dynamic content
+    const sections = document.querySelectorAll('main > section');
+    sections.forEach(section => {
+      section.classList.add('section-loaded');
+    });
+    
+    // Performance optimization: Lazy load images when they come into view
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+              imageObserver.unobserve(img);
+            }
+          }
+        });
+      });
+      
+      const lazyImages = document.querySelectorAll('img[data-src]');
+      lazyImages.forEach(img => imageObserver.observe(img));
+    }
+    
+    // Add focus management for accessibility
+    const skipLink = document.querySelector('.skip-link');
+    if (skipLink) {
+      skipLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector('#main-content');
+        if (target) {
+          target.focus();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+    
+    // Handle keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      // Alt + number keys for quick section navigation
+      if (e.altKey && e.key >= '1' && e.key <= '5') {
+        e.preventDefault();
+        const sectionIndex = parseInt(e.key) - 1;
+        const sections = document.querySelectorAll('main > section');
+        if (sections[sectionIndex]) {
+          sections[sectionIndex].scrollIntoView({ behavior: 'smooth' });
+          sections[sectionIndex].focus();
+        }
+      }
+    });
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPage);
+  } else {
+    initPage();
+  }
+</script>

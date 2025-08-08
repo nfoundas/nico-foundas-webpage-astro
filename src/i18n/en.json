@@ -9,8 +9,12 @@
   },
   "about": {
     "name": "Nico Foundas",
-    "title": "Freelance Senior Software Engineer",
-    "description": "Passionate software engineer with extensive experience in full-stack development, project management, and DevOps practices. I help businesses build scalable, modern applications that drive growth and innovation."
+    "subtitle": "Freelance Senior Software Engineer",
+    "description": "Passionate software engineer with expertise in full-stack development, project management, and DevOps. I help businesses build scalable, modern applications and optimize their development processes.",
+    "imagePlaceholder": "Your Photo Here",
+    "yearsExperience": "Years Experience",
+    "projectsCompleted": "Projects Completed",
+    "happyClients": "Happy Clients"
   },
   "proficiencies": {
     "title": "Proficiencies",
@@ -32,6 +36,7 @@
   },
   "certificates": {
     "title": "Certificates",
+    "description": "Professional certifications and achievements that validate my expertise.",
     "items": [
       {
         "title": "AWS Certified Solutions Architect",
@@ -61,6 +66,7 @@
   },
   "experience": {
     "title": "Experience",
+    "description": "My professional journey and key projects that shaped my expertise in software development.",
     "projects": [
       {
         "title": "E-Commerce Platform Modernization",
@@ -94,18 +100,17 @@
   },
   "contact": {
     "title": "Contact",
-    "subtitle": "Let's work together on your next project",
+    "description": "Ready to start your next project? Let's discuss how I can help bring your ideas to life.",
+    "getInTouch": "Get in Touch",
+    "infoText": "I'm always interested in new opportunities and exciting projects. Feel free to reach out!",
+    "email": "Email",
+    "phone": "Phone",
     "form": {
       "name": "Your Name",
       "email": "Email Address",
-      "message": "Project Details",
-      "submit": "Send Message",
-      "namePlaceholder": "Enter your full name",
-      "emailPlaceholder": "your.email@example.com",
-      "messagePlaceholder": "Tell me about your project requirements, timeline, and goals..."
-    },
-    "success": "Thank you for your message! I'll get back to you soon.",
-    "error": "There was an error sending your message. Please try again."
+      "message": "Your Message",
+      "submit": "Send Message"
+    }
   },
   "accessibility": {
     "skipToMain": "Skip to main content",

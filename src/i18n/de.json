@@ -9,8 +9,12 @@
   },
   "about": {
     "name": "Nico Foundas",
-    "title": "Freiberuflicher Senior Software Engineer",
-    "description": "Leidenschaftlicher Software-Ingenieur mit umfangreicher Erfahrung in Full-Stack-Entwicklung, Projektmanagement und DevOps-Praktiken. Ich helfe Unternehmen dabei, skalierbare, moderne Anwendungen zu entwickeln, die Wachstum und Innovation fördern."
+    "subtitle": "Freiberuflicher Senior Software Engineer",
+    "description": "Leidenschaftlicher Software-Ingenieur mit Expertise in Full-Stack-Entwicklung, Projektmanagement und DevOps. Ich helfe Unternehmen dabei, skalierbare, moderne Anwendungen zu erstellen und ihre Entwicklungsprozesse zu optimieren.",
+    "imagePlaceholder": "Ihr Foto hier",
+    "yearsExperience": "Jahre Erfahrung",
+    "projectsCompleted": "Abgeschlossene Projekte",
+    "happyClients": "Zufriedene Kunden"
   },
   "proficiencies": {
     "title": "Kompetenzen",
@@ -32,6 +36,7 @@
   },
   "certificates": {
     "title": "Zertifikate",
+    "description": "Professionelle Zertifizierungen und Erfolge, die meine Expertise bestätigen.",
     "items": [
       {
         "title": "AWS Certified Solutions Architect",
@@ -43,13 +48,13 @@
         "title": "Certified Scrum Master",
         "issuer": "Scrum Alliance",
         "date": "2022",
-        "description": "Agiles Projektmanagement und Team-Facilitation Zertifizierung."
+        "description": "Agiles Projektmanagement und Team-Facilitierung Zertifizierung."
       },
       {
         "title": "Google Cloud Professional",
         "issuer": "Google Cloud",
         "date": "2023",
-        "description": "Cloud-Plattform-Expertise und Best-Practices-Zertifizierung."
+        "description": "Cloud-Plattform-Expertise und bewährte Praktiken Zertifizierung."
       },
       {
         "title": "Docker Certified Associate",
@@ -61,51 +66,51 @@
   },
   "experience": {
     "title": "Erfahrung",
+    "description": "Mein beruflicher Werdegang und wichtige Projekte, die meine Expertise in der Softwareentwicklung geprägt haben.",
     "projects": [
       {
         "title": "E-Commerce-Plattform Modernisierung",
         "company": "TechCorp Solutions",
         "duration": "2023 - Heute",
-        "description": "Leitete die komplette Modernisierung einer Legacy-E-Commerce-Plattform und migrierte von monolithischer Architektur zu Microservices. Verbesserte die Performance um 300% und reduzierte die Deployment-Zeit um 80%.",
+        "description": "Leitete die komplette Modernisierung einer Legacy-E-Commerce-Plattform, Migration von monolithischer Architektur zu Microservices. Verbesserte Performance um 300% und reduzierte Deployment-Zeit um 80%.",
         "technologies": ["React", "Node.js", "Docker", "AWS", "MongoDB"]
       },
       {
         "title": "Finanz-Dashboard-Anwendung",
         "company": "FinanceFlow Inc.",
         "duration": "2022 - 2023",
-        "description": "Entwickelte ein Echtzeit-Finanz-Dashboard für Portfolio-Management mit erweiterten Analyse- und Reporting-Funktionen. Bediente über 10.000 aktive Nutzer.",
+        "description": "Entwickelte ein Echtzeit-Finanz-Dashboard für Portfolio-Management mit erweiterten Analyse- und Berichtsfunktionen. Bediente über 10.000 aktive Nutzer.",
         "technologies": ["Vue.js", "Python", "PostgreSQL", "Redis", "Kubernetes"]
       },
       {
         "title": "Gesundheitswesen-Management-System",
         "company": "MedTech Innovations",
         "duration": "2021 - 2022",
-        "description": "Entwickelte ein umfassendes Gesundheitswesen-Management-System mit Patientenakten, Terminplanung und Abrechnungsintegration. Stellte HIPAA-Compliance und Datensicherheit sicher.",
+        "description": "Erstellte ein umfassendes Gesundheitswesen-Management-System mit Patientenakten, Terminplanung und Abrechnungsintegration. Stellte HIPAA-Compliance und Datensicherheit sicher.",
         "technologies": ["Angular", "Java Spring", "MySQL", "Azure", "Docker"]
       },
       {
         "title": "IoT-Monitoring-Plattform",
         "company": "SmartDevices Ltd.",
         "duration": "2020 - 2021",
-        "description": "Erstellte eine IoT-Monitoring-Plattform für Industrieanlagen mit Echtzeit-Datenvisualisierung und vorausschauenden Wartungsalarmen. Reduzierte Ausfallzeiten um 45%.",
+        "description": "Entwickelte eine IoT-Monitoring-Plattform für Industrieanlagen mit Echtzeit-Datenvisualisierung und vorausschauenden Wartungsalarmen. Reduzierte Ausfallzeiten um 45%.",
         "technologies": ["React", "Node.js", "InfluxDB", "Grafana", "MQTT"]
       }
     ]
   },
   "contact": {
     "title": "Kontakt",
-    "subtitle": "Lassen Sie uns an Ihrem nächsten Projekt zusammenarbeiten",
+    "description": "Bereit für Ihr nächstes Projekt? Lassen Sie uns besprechen, wie ich Ihnen helfen kann, Ihre Ideen zum Leben zu erwecken.",
+    "getInTouch": "Kontakt aufnehmen",
+    "infoText": "Ich bin immer an neuen Möglichkeiten und spannenden Projekten interessiert. Zögern Sie nicht, mich zu kontaktieren!",
+    "email": "E-Mail",
+    "phone": "Telefon",
     "form": {
       "name": "Ihr Name",
       "email": "E-Mail-Adresse",
-      "message": "Projektdetails",
-      "submit": "Nachricht senden",
-      "namePlaceholder": "Geben Sie Ihren vollständigen Namen ein",
-      "emailPlaceholder": "ihre.email@beispiel.de",
-      "messagePlaceholder": "Erzählen Sie mir von Ihren Projektanforderungen, Zeitplan und Zielen..."
-    },
-    "success": "Vielen Dank für Ihre Nachricht! Ich melde mich bald bei Ihnen.",
-    "error": "Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+      "message": "Ihre Nachricht",
+      "submit": "Nachricht senden"
+    }
   },
   "accessibility": {
     "skipToMain": "Zum Hauptinhalt springen",
