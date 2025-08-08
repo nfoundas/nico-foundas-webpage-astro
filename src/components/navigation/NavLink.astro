@@ -1,0 +1,63 @@
+---
+export interface Props {
+  href: string;
+  class?: string;
+  active?: boolean;
+}
+
+const { 
+  href,
+  class: className = '',
+  active = false
+} = Astro.props;
+
+const classes = [
+  'nav-link',
+  active && 'nav-link-active',
+  className
+].filter(Boolean).join(' ');
+---
+
+<a 
+  href={href}
+  class={classes}
+  aria-current={active ? 'page' : undefined}
+>
+  <slot />
+</a>
+
+<style>
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    min-height: 44px; /* Accessibility - minimum touch target */
+  }
+  
+  .nav-link:hover {
+    color: var(--color-primary);
+    background-color: rgba(232, 180, 184, 0.1);
+  }
+  
+  .nav-link:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+  
+  .nav-link-active {
+    color: var(--color-primary);
+    background-color: rgba(232, 180, 184, 0.15);
+    font-weight: 600;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link {
+      transition: none;
+    }
+  }
+</style>

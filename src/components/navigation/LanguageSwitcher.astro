@@ -1,0 +1,273 @@
+---
+import Icon from '../ui/Icon.astro';
+import { t, languages } from '../../i18n';
+
+export interface Props {
+  lang?: 'en' | 'de';
+}
+
+const { lang = 'en' } = Astro.props;
+---
+
+<div class="language-switcher">
+  <button 
+    class="language-button"
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-label={t('nav.language', lang)}
+    id="language-button"
+  >
+    <span class="language-current" data-lang={lang}>
+      {languages[lang]}
+    </span>
+    <Icon name="chevronDown" size="sm" />
+  </button>
+  
+  <div 
+    class="language-dropdown"
+    role="menu"
+    aria-labelledby="language-button"
+    id="language-dropdown"
+  >
+    {Object.entries(languages).map(([code, name]) => (
+      <button
+        class="language-option"
+        role="menuitem"
+        data-lang={code}
+        aria-pressed={code === lang}
+      >
+        {name}
+      </button>
+    ))}
+  </div>
+</div>
+
+<script is:inline>
+  function initLanguageSwitcher() {
+    const button = document.getElementById('language-button');
+    const dropdown = document.getElementById('language-dropdown');
+    const options = dropdown?.querySelectorAll('.language-option');
+    let isOpen = false;
+    
+    if (!button || !dropdown) return;
+    
+    function toggle() {
+      isOpen ? close() : open();
+    }
+    
+    function open() {
+      isOpen = true;
+      button.setAttribute('aria-expanded', 'true');
+      dropdown.classList.add('open');
+      const firstOption = options?.[0];
+      if (firstOption) firstOption.focus();
+    }
+    
+    function close() {
+      isOpen = false;
+      button.setAttribute('aria-expanded', 'false');
+      dropdown.classList.remove('open');
+      button.focus();
+    }
+    
+    function selectLanguage(lang) {
+      localStorage.setItem('language', lang);
+      document.documentElement.lang = lang;
+      window.dispatchEvent(new CustomEvent('languageChange', { detail: lang }));
+      close();
+    }
+    
+    function updateCurrentLanguage(lang) {
+      const currentSpan = document.querySelector('.language-current');
+      if (currentSpan) {
+        currentSpan.textContent = lang === 'de' ? 'Deutsch' : 'English';
+        currentSpan.setAttribute('data-lang', lang);
+      }
+      
+      options?.forEach(option => {
+        option.setAttribute('aria-pressed', option.dataset.lang === lang ? 'true' : 'false');
+      });
+    }
+    
+    // Event listeners
+    button.addEventListener('click', toggle);
+    
+    options?.forEach(option => {
+      option.addEventListener('click', (e) => {
+        const lang = e.target.dataset.lang;
+        if (lang) selectLanguage(lang);
+      });
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+        close();
+      }
+    });
+    
+    button.addEventListener('keydown', (e) => {
+      switch (e.key) {
+        case 'Enter':
+        case ' ':
+        case 'ArrowDown':
+          e.preventDefault();
+          open();
+          break;
+        case 'Escape':
+          close();
+          break;
+      }
+    });
+    
+    dropdown.addEventListener('keydown', (e) => {
+      const focusedIndex = Array.from(options || []).indexOf(document.activeElement);
+      
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          const nextIndex = (focusedIndex + 1) % (options?.length || 0);
+          if (options?.[nextIndex]) options[nextIndex].focus();
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          const prevIndex = focusedIndex <= 0 ? (options?.length || 1) - 1 : focusedIndex - 1;
+          if (options?.[prevIndex]) options[prevIndex].focus();
+          break;
+        case 'Enter':
+        case ' ':
+          e.preventDefault();
+          if (document.activeElement) document.activeElement.click();
+          break;
+        case 'Escape':
+          e.preventDefault();
+          close();
+          break;
+      }
+    });
+    
+    window.addEventListener('languageChange', (e) => {
+      updateCurrentLanguage(e.detail);
+    });
+    
+    // Initialize current language
+    const currentLang = localStorage.getItem('language') || 'en';
+    updateCurrentLanguage(currentLang);
+  }
+  
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', initLanguageSwitcher);
+</script>
+
+<style>
+  .language-switcher {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .language-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 2px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 44px;
+  }
+  
+  .language-button:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  
+  .language-button:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+  
+  .language-button[aria-expanded="true"] {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  
+  .language-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--color-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+    min-width: 120px;
+  }
+  
+  .language-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .language-option {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    text-align: left;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
+  
+  .language-option:first-child {
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .language-option:last-child {
+    border-radius: 0 0 8px 8px;
+  }
+  
+  .language-option:only-child {
+    border-radius: 8px;
+  }
+  
+  .language-option:hover,
+  .language-option:focus {
+    background-color: rgba(232, 180, 184, 0.1);
+    color: var(--color-primary);
+    outline: none;
+  }
+  
+  .language-option[aria-pressed="true"] {
+    background-color: rgba(232, 180, 184, 0.15);
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .language-button,
+    .language-dropdown,
+    .language-option {
+      transition: none;
+    }
+    
+    .language-dropdown {
+      transform: none;
+    }
+    
+    .language-dropdown.open {
+      transform: none;
+    }
+  }
+</style>

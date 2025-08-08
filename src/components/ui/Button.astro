@@ -1,0 +1,79 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary';
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  loading?: boolean;
+  href?: string;
+  class?: string;
+  ariaLabel?: string;
+}
+
+const { 
+  variant = 'primary',
+  type = 'button',
+  disabled = false,
+  loading = false,
+  href,
+  class: className = '',
+  ariaLabel,
+  ...rest
+} = Astro.props;
+
+const baseClasses = 'btn';
+const variantClasses = {
+  primary: 'btn-primary',
+  secondary: 'btn-secondary'
+};
+
+const classes = [
+  baseClasses,
+  variantClasses[variant],
+  loading && 'loading',
+  className
+].filter(Boolean).join(' ');
+
+---
+
+{href ? (
+  <a 
+    href={href}
+    class={classes}
+    aria-label={ariaLabel}
+    aria-disabled={disabled || loading}
+    role="button"
+    {...rest}
+  >
+    {loading && <span class="spinner" aria-hidden="true"></span>}
+    <slot />
+  </a>
+) : (
+  <button 
+    type={type}
+    class={classes}
+    aria-label={ariaLabel}
+    disabled={disabled || loading}
+    {...rest}
+  >
+    {loading && <span class="spinner" aria-hidden="true"></span>}
+    <slot />
+  </button>
+)}
+
+<style>
+  .btn.loading {
+    gap: 0.5rem;
+  }
+  
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  .btn:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+</style>

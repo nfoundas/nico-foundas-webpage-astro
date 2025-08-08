@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "about": "About Me",
+    "proficiencies": "Proficiencies",
+    "certificates": "Certificates",
+    "experience": "Experience",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "about": {
+    "name": "Nico Foundas",
+    "title": "Freelance Senior Software Engineer",
+    "description": "Passionate software engineer with extensive experience in full-stack development, project management, and DevOps practices. I help businesses build scalable, modern applications that drive growth and innovation."
+  },
+  "proficiencies": {
+    "title": "Proficiencies",
+    "development": {
+      "title": "Development",
+      "description": "Full-stack development with modern technologies and best practices.",
+      "skills": ["JavaScript/TypeScript", "React/Vue/Angular", "Node.js", "Python", "Database Design"]
+    },
+    "projectManagement": {
+      "title": "Project Management",
+      "description": "Agile methodologies and team leadership for successful project delivery.",
+      "skills": ["Scrum/Kanban", "Team Leadership", "Stakeholder Management", "Risk Assessment", "Quality Assurance"]
+    },
+    "devOps": {
+      "title": "DevOps",
+      "description": "Infrastructure automation and continuous integration/deployment.",
+      "skills": ["Docker/Kubernetes", "CI/CD Pipelines", "Cloud Platforms", "Monitoring", "Security"]
+    }
+  },
+  "certificates": {
+    "title": "Certificates",
+    "items": [
+      {
+        "title": "AWS Certified Solutions Architect",
+        "issuer": "Amazon Web Services",
+        "date": "2023",
+        "description": "Professional certification in cloud architecture and AWS services."
+      },
+      {
+        "title": "Certified Scrum Master",
+        "issuer": "Scrum Alliance",
+        "date": "2022",
+        "description": "Agile project management and team facilitation certification."
+      },
+      {
+        "title": "Google Cloud Professional",
+        "issuer": "Google Cloud",
+        "date": "2023",
+        "description": "Cloud platform expertise and best practices certification."
+      },
+      {
+        "title": "Docker Certified Associate",
+        "issuer": "Docker Inc.",
+        "date": "2022",
+        "description": "Container orchestration and deployment certification."
+      }
+    ]
+  },
+  "experience": {
+    "title": "Experience",
+    "projects": [
+      {
+        "title": "E-Commerce Platform Modernization",
+        "company": "TechCorp Solutions",
+        "duration": "2023 - Present",
+        "description": "Led the complete modernization of a legacy e-commerce platform, migrating from monolithic architecture to microservices. Improved performance by 300% and reduced deployment time by 80%.",
+        "technologies": ["React", "Node.js", "Docker", "AWS", "MongoDB"]
+      },
+      {
+        "title": "Financial Dashboard Application",
+        "company": "FinanceFlow Inc.",
+        "duration": "2022 - 2023",
+        "description": "Developed a real-time financial dashboard for portfolio management with advanced analytics and reporting features. Served over 10,000 active users.",
+        "technologies": ["Vue.js", "Python", "PostgreSQL", "Redis", "Kubernetes"]
+      },
+      {
+        "title": "Healthcare Management System",
+        "company": "MedTech Innovations",
+        "duration": "2021 - 2022",
+        "description": "Built a comprehensive healthcare management system with patient records, appointment scheduling, and billing integration. Ensured HIPAA compliance and data security.",
+        "technologies": ["Angular", "Java Spring", "MySQL", "Azure", "Docker"]
+      },
+      {
+        "title": "IoT Monitoring Platform",
+        "company": "SmartDevices Ltd.",
+        "duration": "2020 - 2021",
+        "description": "Created an IoT monitoring platform for industrial equipment with real-time data visualization and predictive maintenance alerts. Reduced downtime by 45%.",
+        "technologies": ["React", "Node.js", "InfluxDB", "Grafana", "MQTT"]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Let's work together on your next project",
+    "form": {
+      "name": "Your Name",
+      "email": "Email Address",
+      "message": "Project Details",
+      "submit": "Send Message",
+      "namePlaceholder": "Enter your full name",
+      "emailPlaceholder": "your.email@example.com",
+      "messagePlaceholder": "Tell me about your project requirements, timeline, and goals..."
+    },
+    "success": "Thank you for your message! I'll get back to you soon.",
+    "error": "There was an error sending your message. Please try again."
+  },
+  "accessibility": {
+    "skipToMain": "Skip to main content",
+    "skipToNav": "Skip to navigation"
+  }
+}
