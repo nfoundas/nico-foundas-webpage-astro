@@ -24,16 +24,22 @@ const description = lang === 'de'
   lang={lang}
 >
   <Navigation lang={lang} />
-  <main id="main-content">
-    <About lang={lang} />
-    <Proficiencies lang={lang} />
-    <Certificates lang={lang} />
-    <Experience lang={lang} />
-    <Contact lang={lang} />
-  </main>
+  <div class="page-wrapper">
+    <main id="main-content">
+      <About lang={lang} />
+      <Proficiencies lang={lang} />
+      <Certificates lang={lang} />
+      <Experience lang={lang} />
+      <Contact lang={lang} />
+    </main>
+  </div>
 </Layout>
 
 <style>
+  .page-wrapper {
+    padding-top: 60px; /* Account for fixed navbar height */
+  }
+  
   main {
     position: relative;
     z-index: 1;
@@ -51,7 +57,7 @@ const description = lang === 'de'
   
   /* Add scroll margin for anchor navigation */
   main > section {
-    scroll-margin-top: 80px;
+    scroll-margin-top: 60px;
   }
   
   /* Reduced motion support */
@@ -63,6 +69,10 @@ const description = lang === 'de'
   
   /* Print styles */
   @media print {
+    .page-wrapper {
+      padding-top: 0;
+    }
+    
     main > section {
       scroll-margin-top: 0;
       page-break-inside: avoid;
