@@ -16,7 +16,7 @@ const { lang = 'en' } = Astro.props;
   aria-labelledby="contact-title"
 >
   <div class="container">
-    <div class="section-header">
+    <div class="section-header scroll-fade">
       <h2 id="contact-title" class="section-title">
         {t('contact.title', lang)}
       </h2>
@@ -26,14 +26,14 @@ const { lang = 'en' } = Astro.props;
     </div>
     
     <div class="contact-content">
-      <div class="contact-info">
+      <div class="contact-info scroll-fade-left">
         <h3 class="contact-info-title">{t('contact.getInTouch', lang)}</h3>
         <p class="contact-info-text">
           {t('contact.infoText', lang)}
         </p>
         
         <div class="contact-methods">
-          <div class="contact-method">
+          <div class="contact-method scroll-fade">
             <div class="contact-method-icon">
               <Icon name="email" size="md" ariaLabel="Email" />
             </div>
@@ -45,7 +45,7 @@ const { lang = 'en' } = Astro.props;
             </div>
           </div>
           
-          <div class="contact-method">
+          <div class="contact-method scroll-fade">
             <div class="contact-method-icon">
               <Icon name="phone" size="md" ariaLabel="Phone" />
             </div>
@@ -57,7 +57,7 @@ const { lang = 'en' } = Astro.props;
             </div>
           </div>
           
-          <div class="contact-method">
+          <div class="contact-method scroll-fade">
             <div class="contact-method-icon">
               <Icon name="linkedin" size="md" ariaLabel="LinkedIn" />
             </div>
@@ -76,7 +76,7 @@ const { lang = 'en' } = Astro.props;
         </div>
       </div>
       
-      <div class="contact-form-container">
+      <div class="contact-form-container scroll-fade-right">
         <form class="contact-form" id="contact-form" novalidate>
           <div class="form-group">
             <label for="name" class="form-label">
@@ -344,7 +344,7 @@ const { lang = 'en' } = Astro.props;
 <style>
   .contact-section {
     padding: 5rem 0;
-    background: var(--color-surface);
+    background: var(--color-surface-dark);
     position: relative;
   }
   
@@ -356,7 +356,7 @@ const { lang = 'en' } = Astro.props;
   .section-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--color-text-primary);
+    color: var(--color-text-light);
     margin: 0 0 1rem 0;
     position: relative;
   }
@@ -375,10 +375,11 @@ const { lang = 'en' } = Astro.props;
   
   .section-description {
     font-size: 1.125rem;
-    color: var(--color-text-secondary);
+    color: var(--color-text-light);
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
+    opacity: 0.9;
   }
   
   .contact-content {

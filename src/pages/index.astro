@@ -1,5 +1,6 @@
 ---
 import Layout from '../components/layout/Layout.astro';
+import Navigation from '../components/navigation/Navigation.astro';
 import About from '../components/sections/About.astro';
 import Proficiencies from '../components/sections/Proficiencies.astro';
 import Certificates from '../components/sections/Certificates.astro';
@@ -22,6 +23,7 @@ const description = lang === 'de'
   description={description}
   lang={lang}
 >
+  <Navigation lang={lang} />
   <main id="main-content">
     <About lang={lang} />
     <Proficiencies lang={lang} />
@@ -150,6 +152,29 @@ const description = lang === 'de'
         }
       }
     });
+    
+    // Initialize scroll animations
+    initScrollAnimations();
+  }
+  
+  function initScrollAnimations() {
+    // Create intersection observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all elements with scroll-fade classes
+    const fadeElements = document.querySelectorAll('.scroll-fade, .scroll-fade-left, .scroll-fade-right');
+    fadeElements.forEach(el => observer.observe(el));
   }
   
   // Initialize when DOM is ready

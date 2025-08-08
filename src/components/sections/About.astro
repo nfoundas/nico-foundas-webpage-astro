@@ -15,7 +15,7 @@ const { lang = 'en' } = Astro.props;
 >
   <div class="container">
     <div class="about-content">
-      <div class="about-image">
+      <div class="about-image scroll-fade-left">
         <div class="image-placeholder">
           <div class="placeholder-icon">
             <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -27,7 +27,7 @@ const { lang = 'en' } = Astro.props;
         </div>
       </div>
       
-      <div class="about-info">
+      <div class="about-info scroll-fade-right">
         <h1 id="about-title" class="about-name">
           {t('about.name', lang)}
         </h1>
@@ -39,15 +39,15 @@ const { lang = 'en' } = Astro.props;
         </div>
         
         <div class="about-highlights">
-          <div class="highlight-item">
+          <div class="highlight-item scroll-fade">
             <span class="highlight-number">5+</span>
             <span class="highlight-label">{t('about.yearsExperience', lang)}</span>
           </div>
-          <div class="highlight-item">
+          <div class="highlight-item scroll-fade">
             <span class="highlight-number">50+</span>
             <span class="highlight-label">{t('about.projectsCompleted', lang)}</span>
           </div>
-          <div class="highlight-item">
+          <div class="highlight-item scroll-fade">
             <span class="highlight-number">20+</span>
             <span class="highlight-label">{t('about.happyClients', lang)}</span>
           </div>
@@ -116,9 +116,9 @@ const { lang = 'en' } = Astro.props;
 
 <style>
   .about-section {
-    padding: 8rem 0 5rem;
+    padding: 4rem 0 2.5rem;
     background: var(--color-background);
-    min-height: 100vh;
+    min-height: 50vh;
     display: flex;
     align-items: center;
   }
