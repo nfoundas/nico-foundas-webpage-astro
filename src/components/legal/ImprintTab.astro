@@ -1,0 +1,93 @@
+---
+import { getTranslation } from '../../i18n/index.ts';
+
+interface Props {
+  lang: 'en' | 'de';
+}
+
+const { lang } = Astro.props;
+const t = getTranslation(lang);
+---
+
+<div 
+  id="imprint-panel" 
+  class="tab-panel active" 
+  role="tabpanel" 
+  aria-labelledby="imprint-tab"
+>
+  <p>
+    <h3>Impressum</h3>
+
+    <p>Nico Foundas<br />
+    Software-Entwickler<br />
+    Main-Neckar-Bahn-Str. 23<br />
+    68229 Mannheim</p>
+
+    <h3>Kontakt</h3>
+    <p>Telefon: +49 1575 4282874<br />
+    E-Mail: nico@foundas.de</p>
+
+    <h3>Umsatzsteuer-ID</h3>
+    <p>Umsatzsteuer-Identifikationsnummer gem&auml;&szlig; &sect; 27 a Umsatzsteuergesetz:<br />
+    abc123</p>
+
+    <h3>Berufsbezeichnung und berufsrechtliche Regelungen</h3>
+    <p>Berufsbezeichnung:<br />
+    Software-Entwickler</p>
+    <p>Verliehen in:<br />
+    Deutschland</p>
+    <h3>Verbraucher&shy;streit&shy;beilegung/Universal&shy;schlichtungs&shy;stelle</h3>
+    <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+    <p>Quelle: <a href="https://www.e-recht24.de">e-recht24.de</a></p>
+  </p>
+</div>
+
+<style>
+  .tab-panel {
+    display: none;
+  }
+  
+  .tab-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .tab-panel h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+    font-size: 1.25rem;
+  }
+  
+  .tab-panel p {
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .tab-panel h3 {
+      font-size: 1.1rem;
+    }
+  }
+  
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .tab-panel {
+      animation: none;
+    }
+  }
+</style>

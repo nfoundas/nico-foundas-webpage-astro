@@ -1,0 +1,503 @@
+---
+import { getTranslation } from '../../i18n/index.ts';
+import ImprintTab from '../legal/ImprintTab.astro';
+import PrivacyTab from '../legal/PrivacyTab.astro';
+import CookiesTab from '../legal/CookiesTab.astro';
+import TermsTab from '../legal/TermsTab.astro';
+
+interface Props {
+  lang: 'en' | 'de';
+}
+
+const { lang } = Astro.props;
+const t = getTranslation(lang);
+---
+
+<div id="legal-modal" class="modal-overlay" aria-hidden="true">
+  <div class="modal-container" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+    <div class="modal-header">
+      <h2 id="modal-title" class="modal-title">Legal Information</h2>
+      <button 
+        type="button" 
+        class="modal-close" 
+        aria-label={t.modal.close}
+        data-close-modal
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <div class="tab-navigation" role="tablist" aria-label="Legal information tabs">
+        <button 
+          type="button" 
+          class="tab-button active" 
+          role="tab" 
+          aria-selected="true" 
+          aria-controls="imprint-panel"
+          data-tab="imprint"
+        >
+          {t.modal.imprint.title}
+        </button>
+        <!-- <button 
+          type="button" 
+          class="tab-button" 
+          role="tab" 
+          aria-selected="false" 
+          aria-controls="privacy-panel"
+          data-tab="privacy"
+        >
+          {t.modal.privacy.title}
+        </button>
+        <button 
+          type="button" 
+          class="tab-button" 
+          role="tab" 
+          aria-selected="false" 
+          aria-controls="cookies-panel"
+          data-tab="cookies"
+        >
+          {t.modal.cookies.title}
+        </button>
+        <button 
+          type="button" 
+          class="tab-button" 
+          role="tab" 
+          aria-selected="false" 
+          aria-controls="terms-panel"
+          data-tab="terms"
+        >
+          {t.modal.terms.title}
+        </button> -->
+      </div>
+      
+      <div class="tab-content">
+        <ImprintTab lang={lang} />
+        <!-- <PrivacyTab lang={lang} />
+        <CookiesTab lang={lang} />
+        <TermsTab lang={lang} /> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 1rem;
+  }
+  
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .modal-container {
+    background: var(--color-surface);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s ease;
+  }
+  
+  .modal-overlay.active .modal-container {
+    transform: scale(1) translateY(0);
+  }
+  
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-background);
+  }
+  
+  .modal-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  
+  .modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 6px;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-close:hover {
+    background: var(--color-border);
+    color: var(--color-text-primary);
+  }
+  
+  .modal-body {
+    overflow-y: auto;
+    max-height: calc(90vh - 80px);
+  }
+  
+  .tab-navigation {
+    display: flex;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-background);
+    overflow-x: auto;
+  }
+  
+  .tab-button {
+    background: none;
+    border: none;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    min-width: fit-content;
+  }
+  
+  .tab-button:hover {
+    color: var(--color-text-primary);
+    background: rgba(212, 165, 116, 0.1);
+  }
+  
+  .tab-button.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+    background: rgba(212, 165, 116, 0.1);
+  }
+  
+  .tab-content {
+    padding: 2rem;
+  }
+  
+  .tab-panel {
+    display: none;
+  }
+  
+  .tab-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .tab-panel h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+    font-size: 1.25rem;
+  }
+  
+  .tab-panel p {
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .modal-overlay {
+      padding: 0.5rem;
+    }
+    
+    .modal-header {
+      padding: 1rem 1.5rem;
+    }
+    
+    .modal-title {
+      font-size: 1.25rem;
+    }
+    
+    .tab-button {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .tab-content {
+      padding: 1.5rem;
+    }
+    
+    .tab-panel h3 {
+      font-size: 1.1rem;
+    }
+  }
+  
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .modal-overlay,
+    .modal-container,
+    .tab-button,
+    .tab-panel {
+      transition: none;
+      animation: none;
+    }
+  }
+  
+  /* Focus management */
+  .tab-button:focus {
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
+  }
+  
+  .modal-close:focus {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  class LegalModal {
+    private modal: HTMLElement | null = null;
+    private activeTab: string = 'imprint';
+    private focusableElements: NodeListOf<HTMLElement> | null = null;
+    private previousFocus: HTMLElement | null = null;
+    
+    constructor() {
+      this.init();
+    }
+    
+    private init(): void {
+      this.modal = document.getElementById('legal-modal');
+      if (!this.modal) return;
+      
+      this.setupEventListeners();
+      this.setupFocusManagement();
+    }
+    
+    private setupEventListeners(): void {
+      if (!this.modal) return;
+      
+      // Close modal events
+      const closeButton = this.modal.querySelector('[data-close-modal]');
+      closeButton?.addEventListener('click', () => this.close());
+      
+      // Close on overlay click
+      this.modal.addEventListener('click', (e) => {
+        if (e.target === this.modal) {
+          this.close();
+        }
+      });
+      
+      // Close on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isOpen()) {
+          this.close();
+        }
+      });
+      
+      // Tab navigation
+      const tabButtons = this.modal.querySelectorAll('.tab-button');
+      tabButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          const target = e.target as HTMLElement;
+          const tabName = target.getAttribute('data-tab');
+          if (tabName) {
+            this.switchTab(tabName);
+          }
+        });
+      });
+      
+      // Keyboard navigation for tabs
+      const tabNavigation = this.modal.querySelector('.tab-navigation');
+      tabNavigation?.addEventListener('keydown', (e) => {
+        this.handleTabKeyNavigation(e as KeyboardEvent);
+      });
+    }
+    
+    private setupFocusManagement(): void {
+      if (!this.modal) return;
+      
+      this.focusableElements = this.modal.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+    }
+    
+    private handleTabKeyNavigation(e: KeyboardEvent): void {
+      const tabButtons = Array.from(this.modal?.querySelectorAll('.tab-button') || []);
+      const currentIndex = tabButtons.findIndex(button => 
+        button.classList.contains('active')
+      );
+      
+      let newIndex = currentIndex;
+      
+      switch (e.key) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          newIndex = currentIndex > 0 ? currentIndex - 1 : tabButtons.length - 1;
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          newIndex = currentIndex < tabButtons.length - 1 ? currentIndex + 1 : 0;
+          break;
+        case 'Home':
+          e.preventDefault();
+          newIndex = 0;
+          break;
+        case 'End':
+          e.preventDefault();
+          newIndex = tabButtons.length - 1;
+          break;
+        default:
+          return;
+      }
+      
+      const newButton = tabButtons[newIndex] as HTMLElement;
+      const tabName = newButton.getAttribute('data-tab');
+      if (tabName) {
+        this.switchTab(tabName);
+        newButton.focus();
+      }
+    }
+    
+    public open(): void {
+      if (!this.modal) return;
+      
+      this.previousFocus = document.activeElement as HTMLElement;
+      this.modal.classList.add('active');
+      this.modal.setAttribute('aria-hidden', 'false');
+      
+      // Focus the first focusable element
+      const firstFocusable = this.modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])') as HTMLElement;
+      firstFocusable?.focus();
+      
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+      
+      // Trap focus
+      this.trapFocus();
+    }
+    
+    public close(): void {
+      if (!this.modal) return;
+      
+      this.modal.classList.remove('active');
+      this.modal.setAttribute('aria-hidden', 'true');
+      
+      // Restore body scroll
+      document.body.style.overflow = '';
+      
+      // Restore focus
+      if (this.previousFocus) {
+        this.previousFocus.focus();
+      }
+    }
+    
+    private switchTab(tabName: string): void {
+      if (!this.modal) return;
+      
+      // Update active tab
+      this.activeTab = tabName;
+      
+      // Update tab buttons
+      const tabButtons = this.modal.querySelectorAll('.tab-button');
+      tabButtons.forEach(button => {
+        const isActive = button.getAttribute('data-tab') === tabName;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-selected', isActive.toString());
+      });
+      
+      // Update tab panels
+      const tabPanels = this.modal.querySelectorAll('.tab-panel');
+      tabPanels.forEach(panel => {
+        const isActive = panel.id === `${tabName}-panel`;
+        panel.classList.toggle('active', isActive);
+      });
+      
+      // Update modal title
+      const modalTitle = this.modal.querySelector('.modal-title');
+      const activeButton = this.modal.querySelector(`[data-tab="${tabName}"]`);
+      if (modalTitle && activeButton) {
+        modalTitle.textContent = activeButton.textContent || 'Legal Information';
+      }
+    }
+    
+    private isOpen(): boolean {
+      return this.modal?.classList.contains('active') || false;
+    }
+    
+    private trapFocus(): void {
+      if (!this.modal || !this.focusableElements) return;
+      
+      const firstFocusable = this.focusableElements[0];
+      const lastFocusable = this.focusableElements[this.focusableElements.length - 1];
+      
+      this.modal.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab') return;
+        
+        if (e.shiftKey) {
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable.focus();
+          }
+        } else {
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable.focus();
+          }
+        }
+      });
+    }
+  }
+  
+  // Initialize modal when DOM is ready
+  let modalInstance: LegalModal;
+  
+  function initModal() {
+    modalInstance = new LegalModal();
+    
+    // Listen for modal open events
+    document.addEventListener('openLegalModal', () => {
+      modalInstance.open();
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initModal);
+  } else {
+    initModal();
+  }
+  
+  // Export for external use
+  (window as any).openLegalModal = () => {
+    if (modalInstance) {
+      modalInstance.open();
+    }
+  };
+</script>

@@ -1,0 +1,127 @@
+---
+import { getTranslation } from '../../i18n/index.ts';
+
+interface Props {
+  lang: 'en' | 'de';
+}
+
+const { lang } = Astro.props;
+const t = getTranslation(lang);
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <button 
+        type="button" 
+        class="footer-link" 
+        data-open-legal-modal
+        aria-label={`${t.footer.imprint} - Opens legal information modal`}
+      >
+        {t.footer.imprint}
+      </button>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: 1.5rem 0;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .footer-link {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    font-family: inherit;
+    min-height: 44px; /* Accessibility - minimum touch target */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footer-link:hover {
+    color: var(--color-primary);
+    background: rgba(212, 165, 116, 0.1);
+  }
+  
+  .footer-link:focus {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    color: var(--color-primary);
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .site-footer {
+      padding: 1rem 0;
+      margin-top: 3rem;
+    }
+    
+    .footer-link {
+      font-size: 0.85rem;
+      padding: 0.75rem 1rem;
+    }
+  }
+  
+  /* Print styles */
+  @media print {
+    .site-footer {
+      display: none;
+    }
+  }
+  
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .footer-link {
+      border: 1px solid var(--color-border);
+    }
+    
+    .footer-link:hover,
+    .footer-link:focus {
+      border-color: var(--color-primary);
+    }
+  }
+</style>
+
+<script>
+  function initFooter() {
+    const footerButton = document.querySelector('[data-open-legal-modal]');
+    
+    if (footerButton) {
+      footerButton.addEventListener('click', () => {
+        // Use the global function exposed by the modal
+        if ((window as any).openLegalModal) {
+          (window as any).openLegalModal();
+        } else {
+          // Fallback: dispatch custom event
+          document.dispatchEvent(new CustomEvent('openLegalModal'));
+        }
+      });
+    }
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFooter);
+  } else {
+    initFooter();
+  }
+  
+  // Re-initialize on language changes
+  window.addEventListener('languageChange', initFooter);
+</script>

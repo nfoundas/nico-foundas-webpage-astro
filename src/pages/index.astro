@@ -6,6 +6,8 @@ import Proficiencies from '../components/sections/Proficiencies.astro';
 import Certificates from '../components/sections/Certificates.astro';
 import Experience from '../components/sections/Experience.astro';
 import Contact from '../components/sections/Contact.astro';
+import Footer from '../components/layout/Footer.astro';
+import Modal from '../components/ui/Modal.astro';
 
 // Get language from URL params or default to 'en'
 const url = new URL(Astro.request.url);
@@ -31,6 +33,8 @@ const description = lang === 'de'
       <Experience lang={lang} />
       <Contact lang={lang} />
     </main>
+  <Footer lang={lang} />
+  <Modal lang={lang} />
 </Layout>
 
 <style>
