@@ -21,17 +21,17 @@
     "development": {
       "title": "Development",
       "description": "Full-stack development with modern technologies and best practices.",
-      "skills": ["JavaScript/TypeScript", "React/Vue/Angular", "Node.js", "Python", "Database Design"]
+      "skills": ["JavaScript/TypeScript", "React/Vue/Angular", "Node.js", "Quality Assurance"]
     },
     "projectManagement": {
       "title": "Project Management",
       "description": "Agile methodologies and team leadership for successful project delivery.",
-      "skills": ["Scrum/Kanban", "Team Leadership", "Stakeholder Management", "Risk Assessment", "Quality Assurance"]
+      "skills": ["Scrum/Kanban", "Team Leadership", "Stakeholder Management", "Quality Assurance"]
     },
     "devOps": {
       "title": "DevOps",
       "description": "Infrastructure automation and continuous integration/deployment.",
-      "skills": ["Docker/Kubernetes", "CI/CD Pipelines", "Cloud Platforms", "Monitoring", "Security"]
+      "skills": ["Azure DevOps", "Docker", "Kubernetes", "CI/CD Pipelines"]
     }
   },
   "certificates": {

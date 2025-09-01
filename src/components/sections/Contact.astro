@@ -39,8 +39,8 @@ const { lang = 'en' } = Astro.props;
             </div>
             <div class="contact-method-content">
               <h4 class="contact-method-title">{t('contact.email', lang)}</h4>
-              <a href="mailto:nico.foundas@example.com" class="contact-method-link">
-                nico.foundas@example.com
+              <a href="mailto:nico@foundas.de" class="contact-method-link">
+                nico@foundas.de
               </a>
             </div>
           </div>
@@ -52,7 +52,7 @@ const { lang = 'en' } = Astro.props;
             <div class="contact-method-content">
               <h4 class="contact-method-title">{t('contact.phone', lang)}</h4>
               <a href="tel:+491234567890" class="contact-method-link">
-                +49 123 456 7890
+                +49 1575 4282874
               </a>
             </div>
           </div>
@@ -128,18 +128,21 @@ const { lang = 'en' } = Astro.props;
             <div id="message-error" class="form-error" role="alert" aria-live="polite"></div>
           </div>
           
-          <div class="form-actions">
-            <Button 
-              type="submit" 
-              variant="primary" 
-              class="submit-button"
-            >
-              <Icon name="email" size="sm" />
-              <span class="submit-text">{t('contact.form.submit', lang)}</span>
-            </Button>
+          <div class="submit-container">
+
+            <div class="form-actions">
+              <Button 
+                type="submit" 
+                variant="primary" 
+                class="submit-button"
+                >
+                <Icon name="email" size="sm" />
+                <span class="submit-text">{t('contact.form.submit', lang)}</span>
+              </Button>
+            </div>
+            
+            <div id="form-status" class="form-status" role="alert" aria-live="polite"></div>
           </div>
-          
-          <div id="form-status" class="form-status" role="alert" aria-live="polite"></div>
         </form>
       </div>
     </div>
@@ -344,7 +347,7 @@ const { lang = 'en' } = Astro.props;
 <style>
   .contact-section {
     padding: 4.5rem 0;
-    background: var(--color-background);
+    background: var(--color-surface);
     position: relative;
   }
   
@@ -475,7 +478,6 @@ const { lang = 'en' } = Astro.props;
   .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
   }
   
   .form-group {
@@ -534,6 +536,11 @@ const { lang = 'en' } = Astro.props;
     margin-top: 1rem;
   }
   
+  .submit-container {
+    display: flex;
+    flex-direction: row;
+  }
+
   .submit-button {
     width: 100%;
     justify-content: center;

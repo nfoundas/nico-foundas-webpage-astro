@@ -11,51 +11,49 @@ const { lang = 'en' } = Astro.props;
 // Mock experience data - replace with real data
 const experiences = [
   {
-    title: 'Senior Full-Stack Developer',
-    company: 'TechCorp Solutions',
-    period: '2022 - Present',
-    description: 'Leading development of enterprise web applications using modern JavaScript frameworks and cloud technologies. Responsible for architecture decisions and mentoring junior developers.',
-    technologies: ['React', 'Node.js', 'TypeScript', 'AWS', 'Docker', 'PostgreSQL'],
+    title: 'Development of a ReactJs application for drawing and modifying roofs on 2D Canvases ·',
+    company: 'Paul Bauder Co & Kg',
+    period: '01/2022 - Present',
+    description: ' Using OpenLayers, my team and I have developed an application that is used to create interactive drawings in the area of building planning. I created complex algorithms for the automatic calculation of domain-specific functionalities and used current design standards to keep the web application accessible to the users. In addition to the professional and technical requirements review and the mentoring of less experienced colleagues, I took on the role of Product Owner for a period of 6 months and thus dedicated myself to the creation of requirements and project organization. ',
+    technologies: ['Construction Sector', 'ReactJs', 'TypeScript', 'OpenLayers', 'MateiraulUI', 'Vitest', 'Jest', 'Playwright', 'Azure DevOps', 'SpringBoot', 'Kotlin', 'Docker', 'PostgreSQL'],
     achievements: [
-      'Reduced application load time by 40% through performance optimization',
-      'Led migration to microservices architecture serving 100k+ users',
-      'Mentored 5 junior developers and established code review processes'
+      'Implementation of complex vector based algorithms',
+      'Ensured code quality by  adding unit, integration and visual regression tests',
+      'Leading the project in the role of product owner',
+      'Keeping stakeholder up to date and discussing new features'
     ]
   },
   {
-    title: 'Project Manager & Developer',
-    company: 'Digital Innovations Ltd',
-    period: '2020 - 2022',
-    description: 'Managed cross-functional teams while contributing to development. Implemented agile methodologies and improved project delivery timelines by 30%.',
-    technologies: ['Vue.js', 'Python', 'Django', 'MySQL', 'Jenkins', 'Kubernetes'],
+    title: 'Angular application for document processing ·',
+    company: 'Novatec Consulting GmbH',
+    period: '02/2021 - 12/2022',
+    description: ' In the role of front-end lead, I was responsible for the development of a new Angular application. I was responsible for the architecture of the new app, as well as customizing the design according to customer requirements, connecting REST APIs and carrying out functional and technical tests to ensure the quality of the requirements. ',
+    technologies: ['Construction Sector', 'Angular', 'TypeScript', 'Jest', 'GitLab', 'Jenkins'],
     achievements: [
-      'Successfully delivered 12 projects on time and within budget',
-      'Implemented CI/CD pipeline reducing deployment time by 60%',
-      'Improved team productivity through agile transformation'
+      'Integration of excel file uploads with automated transformation to application models',
+      'Build application from scatch',
+      'Designing the new application from scratch',
+      'Implemented CI/CD pipeline',
     ]
   },
   {
-    title: 'Full-Stack Developer',
-    company: 'StartupHub Inc',
-    period: '2018 - 2020',
-    description: 'Developed and maintained multiple client applications from concept to deployment. Worked directly with clients to understand requirements and deliver solutions.',
-    technologies: ['Angular', 'Express.js', 'MongoDB', 'Redis', 'Git', 'Linux'],
+    title: 'Angular applications for contract management and visualization of vehicle data',
+    company: 'Novatec Consulting GmbH',
+    period: '10/2018 - 01/2021',
+    description: ' Planning and implementation of migrations and new developments. Development of several Angular applications with TypeScript and REST APIs with Kotlin and Java (Spring Boot). Implementation of functional and technical tests for quality assurance. ',
+    technologies: ['Automotive Sector', 'Angular', 'TypeScript', 'Jext', 'SpringBoot', 'Kotlin', 'Java', 'GitLab', 'Jenkins', 'Grafana'],
     achievements: [
-      'Built 8 client applications from scratch',
-      'Achieved 99.9% uptime across all deployed applications',
-      'Established automated testing practices increasing code quality'
+      'Built multiple client applications from scratch'
     ]
   },
   {
-    title: 'Junior Software Developer',
-    company: 'CodeCraft Agency',
-    period: '2016 - 2018',
-    description: 'Started career developing web applications and learning modern development practices. Contributed to various client projects and internal tools.',
-    technologies: ['JavaScript', 'PHP', 'Laravel', 'MySQL', 'HTML/CSS', 'jQuery'],
+    title: 'Bachelor of Science - Applied Computer Science',
+    company: 'DHBW Stuttgart / Novatec Consulting GmbH',
+    period: '10/2015 - 09/2018',
+    description: 'Practical bachelor degree program with a strong focus on software development and practical work in the company.',
+    technologies: ['Angular', 'TypeScript', 'Etherium', 'Bitcoing', 'Java', 'Kotlin', 'Jira', 'Confluence', 'Project Management'],
     achievements: [
-      'Completed 15+ client projects successfully',
-      'Learned and applied modern development frameworks',
-      'Contributed to open-source projects and internal tools'
+      'Bachelor Thesis / Smart Contracts im Bereich E-Health - Datenaustausch zwischen Arzt und Patient'
     ]
   }
 ];
@@ -164,7 +162,7 @@ const experiences = [
 <style>
   .experience-section {
     padding: 5rem 0;
-    background: var(--color-surface);
+    background: var(--color-background);
     position: relative;
   }
   
@@ -331,8 +329,7 @@ const experiences = [
     
     .timeline-date--right,
     .timeline-date--left {
-      left: 50px;
-      right: auto;
+      display: none;
     }
   }
   

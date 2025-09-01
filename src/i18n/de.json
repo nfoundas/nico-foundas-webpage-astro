@@ -10,7 +10,7 @@
   "about": {
     "name": "Nico Foundas",
     "subtitle": "Freiberuflicher Senior Software Engineer",
-    "description": "Leidenschaftlicher Software-Ingenieur mit Expertise in Full-Stack-Entwicklung, Projektmanagement und DevOps. Ich helfe Unternehmen dabei, skalierbare, moderne Anwendungen zu erstellen und ihre Entwicklungsprozesse zu optimieren.",
+    "description": "Leidenschaftlicher Software-Entwickler mit Fokus auf Frontend-Entwicklung und Projektmanagement. Ich helfe Unternehmen dabei, skalierbare, moderne Business-Applikationen zu erstellen und derren Entwicklungsprozesse zu optimieren.",
     "imagePlaceholder": "Ihr Foto hier",
     "yearsExperience": "Jahre Erfahrung",
     "projectsCompleted": "Abgeschlossene Projekte",
@@ -21,7 +21,7 @@
     "development": {
       "title": "Entwicklung",
       "description": "Full-Stack-Entwicklung mit modernen Technologien und bewährten Praktiken.",
-      "skills": ["JavaScript/TypeScript", "React/Vue/Angular", "Node.js", "Python", "Datenbankdesign"]
+      "skills": ["ReactJS / Astro", "JavaScript / TypeScript",  "Node.js", "Python", "Datenbankdesign"]
     },
     "projectManagement": {
       "title": "Projektmanagement",

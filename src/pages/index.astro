@@ -24,22 +24,16 @@ const description = lang === 'de'
   lang={lang}
 >
   <Navigation lang={lang} />
-  <div class="page-wrapper">
     <main id="main-content">
       <About lang={lang} />
       <Proficiencies lang={lang} />
-      <Certificates lang={lang} />
+      <!-- <Certificates lang={lang} /> -->
       <Experience lang={lang} />
       <Contact lang={lang} />
     </main>
-  </div>
 </Layout>
 
 <style>
-  .page-wrapper {
-    padding-top: 60px; /* Account for fixed navbar height */
-  }
-  
   main {
     position: relative;
     z-index: 1;
