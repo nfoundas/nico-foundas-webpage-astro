@@ -1,12 +1,11 @@
 ---
-import { getTranslation } from '../../i18n/index.ts';
+import { t } from '../../i18n/index.ts';
 
 interface Props {
   lang: 'en' | 'de';
 }
 
-const { lang } = Astro.props;
-const t = getTranslation(lang);
+const { lang = 'en' } = Astro.props;
 ---
 
 <div 
@@ -15,33 +14,91 @@ const t = getTranslation(lang);
   role="tabpanel" 
   aria-labelledby="imprint-tab"
 >
-  <p>
-    <h3>Impressum</h3>
+  <h3 id="title">{t('legalModal.imprint.title', lang)}</h3>
 
-    <p>Nico Foundas<br />
-    Software-Entwickler<br />
-    Main-Neckar-Bahn-Str. 23<br />
-    68229 Mannheim</p>
+  <p id="legal-adress">
+     {t('legalModal.imprint.legal-adress', lang)}
+  </p>
 
-    <h3>Kontakt</h3>
-    <p>Telefon: +49 1575 4282874<br />
-    E-Mail: nico@foundas.de</p>
+  <h3 id="contact-title">{t('legalModal.imprint.contact.title', lang)}</h3>
+  <p id="contact-content">
+    {t('legalModal.imprint.contact.content', lang)}
+  </p>
 
-    <h3>Umsatzsteuer-ID</h3>
-    <p>Umsatzsteuer-Identifikationsnummer gem&auml;&szlig; &sect; 27 a Umsatzsteuergesetz:<br />
-    abc123</p>
+  <h3 id="vatId-title">
+    {t('legalModal.imprint.contact.content', lang)}
+  </h3>
+  <p id="vatId-content">
+    {t('legalModal.imprint.contact.content', lang)}
+  </p>
 
-    <h3>Berufsbezeichnung und berufsrechtliche Regelungen</h3>
-    <p>Berufsbezeichnung:<br />
-    Software-Entwickler</p>
-    <p>Verliehen in:<br />
-    Deutschland</p>
-    <h3>Verbraucher&shy;streit&shy;beilegung/Universal&shy;schlichtungs&shy;stelle</h3>
-    <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
-
-    <p>Quelle: <a href="https://www.e-recht24.de">e-recht24.de</a></p>
+  <h3 id="job-description-title">
+    {t('legalModal.imprint.contact.content', lang)}
+  </h3>
+  <p id="job-description-content">
+    {t('legalModal.imprint.contact.content', lang)}
+  </p>
+  <p id="job-awarded-in">
+    {t('legalModal.imprint.contact.content', lang)}
+  </p>
+  <h3 id="regulations-title">
+    {t('legalModal.imprint.contact.content', lang)}
+  </h3>
+  <p id="regulations-content">
+    {t('legalModal.imprint.contact.content', lang)}
   </p>
 </div>
+
+<script>
+  import { getTranslation, type Language } from '../../i18n';
+
+  function initAboutSection() {
+    // Update content on language change
+    window.addEventListener('languageChange', (e: any) => {
+      const lang = e.detail;
+      const currentTranslations = getTranslation(lang).legalModal.imprint
+      
+      // Update content
+      const title = document.getElementById('title');
+      const legalAdress = document.getElementById('legal-adress');
+      const contactTitle = document.getElementById('contact-title');
+      const contactContent = document.getElementById('contact-content');
+      const vatIdTitle = document.getElementById('vatId-title');
+      const vatIdContent = document.getElementById('vatId-content');
+      const jobDescriptionTitle = document.getElementById('job-description-title');
+      const jobDescriptionContent = document.getElementById('job-description-content');
+      const jobAwardedInContent = document.getElementById('job-awarded-in');
+      const regulationsTitle = document.getElementById('regulations-title');
+      const regulationsContent = document.getElementById('regulations-content');
+
+      console.log(title)
+      console.log(legalAdress)
+      console.log(contactTitle)
+      console.log(contactContent)
+      console.log(vatIdTitle)
+      console.log(vatIdContent)
+      console.log(jobDescriptionTitle)
+      console.log(jobDescriptionContent)
+      console.log(jobAwardedInContent)
+      console.log(regulationsTitle)
+      console.log(regulationsContent)
+      
+      if (title) title.textContent = currentTranslations.title;
+      if (legalAdress) legalAdress.textContent = currentTranslations.legalAdress;
+      if (contactTitle) contactTitle.textContent = currentTranslations.contact.title;
+      if (contactContent) contactContent.textContent = currentTranslations.contact.content;
+      if (vatIdTitle) vatIdTitle.textContent = currentTranslations.vatId.title;
+      if (vatIdContent) vatIdContent.textContent = currentTranslations.vatId.content;
+      if (jobDescriptionTitle) jobDescriptionTitle.textContent = currentTranslations.jobDescriptionAndRegulations.title;
+      if (jobDescriptionContent) jobDescriptionContent.textContent = currentTranslations.jobDescriptionAndRegulations.jobDescription;
+      if (jobAwardedInContent) jobAwardedInContent.textContent = currentTranslations.jobDescriptionAndRegulations.awardedIn;
+      if (regulationsTitle) regulationsTitle.textContent = currentTranslations.consumerResolutionAndUniversalArbitration.title;
+      if (regulationsContent) regulationsContent.textContent = currentTranslations.consumerResolutionAndUniversalArbitration.content;
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', initAboutSection);
+</script>
 
 <style>
   .tab-panel {
@@ -64,6 +121,7 @@ const t = getTranslation(lang);
     line-height: 1.7;
     color: var(--color-text-secondary);
     margin-bottom: 1rem;
+    white-space: pre-line;
   }
   
   @keyframes fadeIn {

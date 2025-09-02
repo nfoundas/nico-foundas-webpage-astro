@@ -138,11 +138,28 @@
   "footer": {
     "imprint": "Impressum"
   },
-  "modal": {
+  "legalModal": {
     "close": "Schließen",
     "imprint": {
       "title": "Impressum",
-      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      "legalAdress": "Nico Foundas\nSoftware-Entwickler\nMain-Neckar-Bahn-Str. 23\n68229 Mannheim\nDeutschland",
+      "contact": {
+        "title": "Kontakt", 
+        "content": "Telefon: +49 1575 4282874\nE-Mail: nico@foundas.de"
+      },
+      "vatId": {
+        "title": "Umsatzsteuer-ID", 
+        "content": "Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:\nabc123"
+      },
+      "jobDescriptionAndRegulations": {
+        "title": "Berufsbezeichnung und berufsrechtliche Regelungen", 
+        "jobDescription": "Berufsbezeichnung:\nSoftware-Entwickler",
+        "awardedIn": "Verliehen in:\nDeutschland"
+      },
+      "consumerResolutionAndUniversalArbitration": {
+        "title": "Verbraucherstreitbeilegung / Universalschlichtungsstelle", 
+        "content": "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
+      }
     },
     "privacy": {
       "title": "Datenschutzerklärung",

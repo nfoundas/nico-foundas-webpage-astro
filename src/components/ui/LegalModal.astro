@@ -20,7 +20,7 @@ const t = getTranslation(lang);
       <button 
         type="button" 
         class="modal-close" 
-        aria-label={t.modal.close}
+        aria-label={t.legalModal.close}
         data-close-modal
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -40,7 +40,7 @@ const t = getTranslation(lang);
           aria-controls="imprint-panel"
           data-tab="imprint"
         >
-          {t.modal.imprint.title}
+          {t.legalModal.imprint.title}
         </button>
         <!-- <button 
           type="button" 
@@ -50,7 +50,7 @@ const t = getTranslation(lang);
           aria-controls="privacy-panel"
           data-tab="privacy"
         >
-          {t.modal.privacy.title}
+          {t.legalModal.privacy.title}
         </button>
         <button 
           type="button" 
@@ -60,7 +60,7 @@ const t = getTranslation(lang);
           aria-controls="cookies-panel"
           data-tab="cookies"
         >
-          {t.modal.cookies.title}
+          {t.legalModal.cookies.title}
         </button>
         <button 
           type="button" 
@@ -70,7 +70,7 @@ const t = getTranslation(lang);
           aria-controls="terms-panel"
           data-tab="terms"
         >
-          {t.modal.terms.title}
+          {t.legalModal.terms.title}
         </button> -->
       </div>
       
@@ -481,7 +481,7 @@ const t = getTranslation(lang);
   
   function initModal() {
     modalInstance = new LegalModal();
-    
+    modalInstance.open();
     // Listen for modal open events
     document.addEventListener('openLegalModal', () => {
       modalInstance.open();

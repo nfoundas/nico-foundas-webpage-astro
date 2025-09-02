@@ -138,11 +138,28 @@
   "footer": {
     "imprint": "Imprint"
   },
-  "modal": {
+  "legalModal": {
     "close": "Close",
     "imprint": {
       "title": "Imprint",
-      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      "legalAdress": "Nico Foundas\nSoftware-Entwickler\nMain-Neckar-Bahn-Str. 23\n68229 Mannheim\nGermany",
+      "contact": {
+        "title": "Contact", 
+        "content": "Mobile: +49 1575 4282874\nE-Mail: nico@foundas.de"
+      },
+      "vatId": {
+        "title": "VAT-ID", 
+        "content": "Sales tax identification number in accordance with §27 a of the Sales Tax Act:\nabc123"
+      },
+      "jobDescriptionAndRegulations": {
+        "title": "Job Title And Professional Regulations", 
+        "jobDescription": "Job title:\nSoftware Engineer",
+        "awardedIn": "Awarded in:\nGermany"
+      },
+      "consumerResolutionAndUniversalArbitration": {
+        "title": "Consumer Dispute Resolution / Universal Arbitration Body", 
+        "content": "We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board."
+      }
     },
     "privacy": {
       "title": "Privacy Policy",
