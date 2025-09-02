@@ -100,7 +100,7 @@ const { lang = 'en' } = Astro.props;
     });
     
     document.addEventListener('click', (e) => {
-      if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+      if (isOpen && !button.contains(e.target) && !dropdown.contains(e.target)) {
         close();
       }
     });
