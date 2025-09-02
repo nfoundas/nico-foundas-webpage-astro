@@ -70,18 +70,6 @@ const { lang = 'en' } = Astro.props;
       const jobAwardedInContent = document.getElementById('job-awarded-in');
       const regulationsTitle = document.getElementById('regulations-title');
       const regulationsContent = document.getElementById('regulations-content');
-
-      console.log(title)
-      console.log(legalAdress)
-      console.log(contactTitle)
-      console.log(contactContent)
-      console.log(vatIdTitle)
-      console.log(vatIdContent)
-      console.log(jobDescriptionTitle)
-      console.log(jobDescriptionContent)
-      console.log(jobAwardedInContent)
-      console.log(regulationsTitle)
-      console.log(regulationsContent)
       
       if (title) title.textContent = currentTranslations.title;
       if (legalAdress) legalAdress.textContent = currentTranslations.legalAdress;
@@ -93,8 +81,8 @@ const { lang = 'en' } = Astro.props;
       if (jobDescriptionContent) jobDescriptionContent.textContent = currentTranslations.jobDescriptionAndRegulations.jobDescription;
       if (jobAwardedInContent) jobAwardedInContent.textContent = currentTranslations.jobDescriptionAndRegulations.awardedIn;
       if (regulationsTitle) regulationsTitle.textContent = currentTranslations.consumerResolutionAndUniversalArbitration.title;
-      if (regulationsContent) regulationsContent.textContent = currentTranslations.consumerResolutionAndUniversalArbitration.content;
-    });
+      if (regulationsContent) regulationsContent.textContent = currentTranslations.consumerResolutionAndUniversalArbitration.content;}
+    );
   }
   
   document.addEventListener('DOMContentLoaded', initAboutSection);
