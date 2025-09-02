@@ -1,12 +1,11 @@
 ---
-import { getTranslation } from '../../i18n/index.ts';
+import { t } from '../../i18n/index.ts';
 
 interface Props {
   lang: 'en' | 'de';
 }
 
 const { lang } = Astro.props;
-const t = getTranslation(lang);
 ---
 
 <footer class="site-footer">
@@ -14,11 +13,12 @@ const t = getTranslation(lang);
     <div class="footer-content">
       <button 
         type="button" 
+        id="footer-imprint"
         class="footer-link" 
         data-open-legal-modal
-        aria-label={`${t.footer.imprint} - Opens legal information modal`}
+        aria-label={`${t('footer.imprint', lang)} - Opens legal information modal`}
       >
-        {t.footer.imprint}
+        {t('footer.imprint', lang)}
       </button>
     </div>
   </div>
@@ -99,6 +99,8 @@ const t = getTranslation(lang);
 </style>
 
 <script>
+  import { getTranslation } from "../../i18n";
+
   function initFooter() {
     const footerButton = document.querySelector('[data-open-legal-modal]');
     
@@ -121,6 +123,19 @@ const t = getTranslation(lang);
   } else {
     initFooter();
   }
+
+  // Update navigation text on language change
+    window.addEventListener('languageChange', (e: any) => {
+      const lang = e.detail;
+      
+      const currentTranslations = getTranslation(lang).footer
+      
+      
+      // Update nav links
+     const imprint = document.getElementById('footer-imprint')
+
+     if (imprint) imprint.textContent = currentTranslations.imprint
+    });
   
   // Re-initialize on language changes
   window.addEventListener('languageChange', initFooter);

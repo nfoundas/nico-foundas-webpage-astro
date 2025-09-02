@@ -283,9 +283,7 @@ const { lang = 'en' } = Astro.props;
     
     // Update content on language change
     window.addEventListener('languageChange', (e: any) => {
-      console.log({e})
       const lang = e.detail;
-      console.log({lang})
       
       const currentTranslations = getTranslation(lang).contact
       

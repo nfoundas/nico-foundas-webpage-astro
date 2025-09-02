@@ -10,7 +10,7 @@
   "about": {
     "name": "Nico Foundas",
     "subtitle": "Freiberuflicher Senior Software Engineer",
-    "description": "Ich bin Nico und seit mehr als 7 Jahren leidenschaftlicher Software-Entwickler, mit Fokus auf Frontend-Entwicklung und Projektmanagement. Ich helfe Unternehmen dabei, skalierbare, moderne Business-Applikationen zu erstellen und derren Entwicklungsprozesse zu optimieren. Meine Kenntnisse reichen vom Verstehen und Definieren komplexer Algorithmen und domänenspezifischer Kontexte, bis hin zur engen Zusammenarbeit mit anderen Kolleg:innen in einem internationalen Team.",
+    "description": "Ich bin Nico und seit mehr als 7 Jahren leidenschaftlicher Software-Entwickler, mit Fokus auf Frontend-Entwicklung und Projektmanagement. Ich helfe Unternehmen dabei, skalierbare, moderne Business-Applikationen zu erstellen und deren Entwicklungsprozesse zu optimieren. Meine Kenntnisse reichen vom Verstehen und Definieren komplexer Algorithmen und domänenspezifischer Kontexte, bis hin zur engen Zusammenarbeit mit anderen Kolleg:innen in einem internationalen Team.",
     "imagePlaceholder": "Ihr Foto hier",
     "yearsExperience": "Jahre Erfahrung",
     "projectsCompleted": "Abgeschlossene Projekte",
@@ -73,7 +73,7 @@
         "title": "Entwicklung einer ReactJs-Anwendung zum Zeichnen und Bearbeiten von Dächern auf einem 2D-Canvas",
         "company": "Paul Bauder Co & Kg",
         "duration": "01/2022 - Gegenwart",
-        "description": "Unter Verwendung von OpenLayers haben mein Team und ich eine Anwendung entwickelt, die für die Erstellung interaktiver Zeichnungen im Bereich der Bauplanung genutzt wird. Ich habe komplexe Algorithmen für die automatische Berechnung domänenspezifischer Funktionalitäten entwickelt und aktuelle Designstandards angewendet, um die Webanwendung für die Benutzer zugänglich zu halten. Neben der fachlichen und technischen Anforderungsanalyse sowie der Betreuung weniger erfahrener Kollegen übernahm ich für einen Zeitraum von 6 Monaten die Rolle des Product Owners und widmete mich damit der Erstellung von Anforderungen und der Projektorganisation.",
+        "description": "Unter Verwendung von OpenLayers haben mein Team und ich eine Anwendung entwickelt, die für die Erstellung interaktiver Zeichnungen im Bereich der Bauplanung genutzt wird. Ich habe komplexe Algorithmen für die automatische Berechnung domänenspezifischer Funktionalitäten entwickelt und aktuelle Designstandards angewendet, um die Webanwendung für die Benutzer zugänglich zu halten. Neben der fachlichen und technischen Anforderungsanalyse, sowie der Betreuung weniger erfahrener Kolleg:innen übernahm ich für einen Zeitraum von 6 Monaten die Rolle des Product Owners und widmete mich damit der Erstellung von Anforderungen und der Projektorganisation.",
         "technologies": ["Bausektor", "ReactJs", "TypeScript", "OpenLayers", "MateiraulUI", "Vitest", "Jest", "Playwright", "Azure DevOps", "SpringBoot", "Kotlin", "Docker", "PostgreSQL"],
         "achievements": [
           "Implementierung komplexer, vektorbasierter Algorithmen",
