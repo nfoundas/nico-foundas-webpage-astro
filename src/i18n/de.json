@@ -20,7 +20,7 @@
     "title": "Kompetenzen",
     "development": {
       "title": "Entwicklung",
-      "description": "Full-Stack-Entwicklung mit modernen Technologien und bewährten Praktiken.",
+      "description": "Frontend-Entwicklung mit modernen Technologien und bewährten Praktiken.",
       "skills": ["ReactJS / Astro", "Frontend-Architektur", "JavaScript / TypeScript",  "Qualitätssicherung"]
     },
     "projectManagement": {
