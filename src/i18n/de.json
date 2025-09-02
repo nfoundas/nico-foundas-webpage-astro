@@ -10,7 +10,7 @@
   "about": {
     "name": "Nico Foundas",
     "subtitle": "Freiberuflicher Senior Software Engineer",
-    "description": "Leidenschaftlicher Software-Entwickler mit Fokus auf Frontend-Entwicklung und Projektmanagement. Ich helfe Unternehmen dabei, skalierbare, moderne Business-Applikationen zu erstellen und derren Entwicklungsprozesse zu optimieren.",
+    "description": "Ich bin Nico und seit mehr als 7 Jahren leidenschaftlicher Software-Entwickler, mit Fokus auf Frontend-Entwicklung und Projektmanagement. Ich helfe Unternehmen dabei, skalierbare, moderne Business-Applikationen zu erstellen und derren Entwicklungsprozesse zu optimieren. Meine Kenntnisse reichen vom Verstehen und Definieren komplexer Algorithmen und domänenspezifischer Kontexte, bis hin zur engen Zusammenarbeit mit anderen Kolleg:innen in einem internationalen Team.",
     "imagePlaceholder": "Ihr Foto hier",
     "yearsExperience": "Jahre Erfahrung",
     "projectsCompleted": "Abgeschlossene Projekte",
@@ -21,17 +21,17 @@
     "development": {
       "title": "Entwicklung",
       "description": "Full-Stack-Entwicklung mit modernen Technologien und bewährten Praktiken.",
-      "skills": ["ReactJS / Astro", "JavaScript / TypeScript",  "Node.js", "Python", "Datenbankdesign"]
+      "skills": ["ReactJS / Astro", "Frontend-Architektur", "JavaScript / TypeScript",  "Qualitätssicherung"]
     },
     "projectManagement": {
       "title": "Projektmanagement",
       "description": "Agile Methoden und Teamführung für erfolgreiche Projektabwicklung.",
-      "skills": ["Scrum/Kanban", "Teamführung", "Stakeholder-Management", "Risikobewertung", "Qualitätssicherung"]
+      "skills": ["Scrum/Kanban", "Teamführung", "Stakeholder-Management", "Anforderungsmanagement"]
     },
     "devOps": {
       "title": "DevOps",
       "description": "Infrastruktur-Automatisierung und kontinuierliche Integration/Bereitstellung.",
-      "skills": ["Docker/Kubernetes", "CI/CD-Pipelines", "Cloud-Plattformen", "Monitoring", "Sicherheit"]
+      "skills": ["Azure DevOps", "Docker", "Kubernetes", "CI/CD-Pipelines"]
     }
   },
   "certificates": {
@@ -67,34 +67,53 @@
   "experience": {
     "title": "Erfahrung",
     "description": "Mein beruflicher Werdegang und wichtige Projekte, die meine Expertise in der Softwareentwicklung geprägt haben.",
+    "keyAchievements": "Wichtige Erfolge",
     "projects": [
       {
-        "title": "E-Commerce-Plattform Modernisierung",
-        "company": "TechCorp Solutions",
-        "duration": "2023 - Heute",
-        "description": "Leitete die komplette Modernisierung einer Legacy-E-Commerce-Plattform, Migration von monolithischer Architektur zu Microservices. Verbesserte Performance um 300% und reduzierte Deployment-Zeit um 80%.",
-        "technologies": ["React", "Node.js", "Docker", "AWS", "MongoDB"]
+        "title": "Entwicklung einer ReactJs-Anwendung zum Zeichnen und Bearbeiten von Dächern auf einem 2D-Canvas",
+        "company": "Paul Bauder Co & Kg",
+        "duration": "01/2022 - Gegenwart",
+        "description": "Unter Verwendung von OpenLayers haben mein Team und ich eine Anwendung entwickelt, die für die Erstellung interaktiver Zeichnungen im Bereich der Bauplanung genutzt wird. Ich habe komplexe Algorithmen für die automatische Berechnung domänenspezifischer Funktionalitäten entwickelt und aktuelle Designstandards angewendet, um die Webanwendung für die Benutzer zugänglich zu halten. Neben der fachlichen und technischen Anforderungsanalyse sowie der Betreuung weniger erfahrener Kollegen übernahm ich für einen Zeitraum von 6 Monaten die Rolle des Product Owners und widmete mich damit der Erstellung von Anforderungen und der Projektorganisation.",
+        "technologies": ["Bausektor", "ReactJs", "TypeScript", "OpenLayers", "MateiraulUI", "Vitest", "Jest", "Playwright", "Azure DevOps", "SpringBoot", "Kotlin", "Docker", "PostgreSQL"],
+        "achievements": [
+          "Implementierung komplexer, vektorbasierter Algorithmen",
+          "Sicherstellung der Codequalität durch Hinzufügen von Unit-, Integrations- und visuellen Regressionstests",
+          "Leitung des Projekts in der Rolle des Product Owners",
+          "Regelmäßige Information der Stakeholder und Diskussion neuer Funktionen"
+        ]
       },
       {
-        "title": "Finanz-Dashboard-Anwendung",
-        "company": "FinanceFlow Inc.",
-        "duration": "2022 - 2023",
-        "description": "Entwickelte ein Echtzeit-Finanz-Dashboard für Portfolio-Management mit erweiterten Analyse- und Berichtsfunktionen. Bediente über 10.000 aktive Nutzer.",
-        "technologies": ["Vue.js", "Python", "PostgreSQL", "Redis", "Kubernetes"]
+        "title": "Angular-Anwendung zur Dokumentenverarbeitung",
+        "company": "Novatec Consulting GmbH",
+        "duration": "02/2021 - 12/2022",
+        "description": "In der Rolle des Frontend-Leads war ich verantwortlich für die Entwicklung einer neuen Angular-Anwendung. Ich war zuständig für die Architektur der neuen App, die Anpassung des Designs an Kundenanforderungen, die Anbindung von REST-APIs, sowie die Durchführung funktionaler und technischer Tests zur Sicherstellung der Qualitätsanforderungen.",
+        "technologies": ["Bausektor", "Angular", "TypeScript", "Jest", "GitLab", "Jenkins"],
+        "achievements": [
+          "Integration von Excel-Datei-Uploads mit automatischer Transformation in Anwendungsmodelle",
+          "Entwicklung der Anwendung von Grund auf",
+          "Gestaltung der neuen Anwendung von Grund auf",
+          "Implementierung einer CI/CD-Pipeline"
+        ]
       },
       {
-        "title": "Gesundheitswesen-Management-System",
-        "company": "MedTech Innovations",
-        "duration": "2021 - 2022",
-        "description": "Erstellte ein umfassendes Gesundheitswesen-Management-System mit Patientenakten, Terminplanung und Abrechnungsintegration. Stellte HIPAA-Compliance und Datensicherheit sicher.",
-        "technologies": ["Angular", "Java Spring", "MySQL", "Azure", "Docker"]
+        "title": "Angular-Anwendungen für Vertragsmanagement und Visualisierung von Fahrzeugdaten",
+        "company": "Novatec Consulting GmbH",
+        "duration": "10/2018 - 01/2021",
+        "description": "Planung und Umsetzung von Migrationen und Neuentwicklungen. Entwicklung mehrerer Angular-Anwendungen mit TypeScript und REST-APIs mit Kotlin und Java (Spring Boot). Implementierung funktionaler und technischer Tests zur Qualitätssicherung.",
+        "technologies": ["Automobilsektor", "Angular", "TypeScript", "Jext", "SpringBoot", "Kotlin", "Java", "GitLab", "Jenkins", "Grafana"],
+        "achievements": [
+          "Entwicklung mehrerer Client-Anwendungen von scratch"
+        ]
       },
       {
-        "title": "IoT-Monitoring-Plattform",
-        "company": "SmartDevices Ltd.",
-        "duration": "2020 - 2021",
-        "description": "Entwickelte eine IoT-Monitoring-Plattform für Industrieanlagen mit Echtzeit-Datenvisualisierung und vorausschauenden Wartungsalarmen. Reduzierte Ausfallzeiten um 45%.",
-        "technologies": ["React", "Node.js", "InfluxDB", "Grafana", "MQTT"]
+        "title": "Bachelor of Science - Angewandte Informatik",
+        "company": "DHBW Stuttgart / Novatec Consulting GmbH",
+        "duration": "10/2015 - 09/2018",
+        "description": "Praktisches Bachelorstudium mit starkem Fokus auf Softwareentwicklung und praktischer Arbeit im Unternehmen.",
+        "technologies": ["Angular", "TypeScript", "Ethereum", "Bitcoin", "Java", "Kotlin", "Jira", "Confluence", "Projektmanagement"],
+        "achievements": [
+          "Bachelorarbeit / Smart Contracts im Bereich E-Health - Datenaustausch zwischen Arzt und Patient"
+        ]
       }
     ]
   },

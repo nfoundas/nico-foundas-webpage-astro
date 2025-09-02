@@ -7,56 +7,6 @@ export interface Props {
 }
 
 const { lang = 'en' } = Astro.props;
-
-// Mock experience data - replace with real data
-const experiences = [
-  {
-    title: 'Development of a ReactJs application for drawing and modifying roofs on 2D Canvases ·',
-    company: 'Paul Bauder Co & Kg',
-    period: '01/2022 - Present',
-    description: ' Using OpenLayers, my team and I have developed an application that is used to create interactive drawings in the area of building planning. I created complex algorithms for the automatic calculation of domain-specific functionalities and used current design standards to keep the web application accessible to the users. In addition to the professional and technical requirements review and the mentoring of less experienced colleagues, I took on the role of Product Owner for a period of 6 months and thus dedicated myself to the creation of requirements and project organization. ',
-    technologies: ['Construction Sector', 'ReactJs', 'TypeScript', 'OpenLayers', 'MateiraulUI', 'Vitest', 'Jest', 'Playwright', 'Azure DevOps', 'SpringBoot', 'Kotlin', 'Docker', 'PostgreSQL'],
-    achievements: [
-      'Implementation of complex vector based algorithms',
-      'Ensured code quality by  adding unit, integration and visual regression tests',
-      'Leading the project in the role of product owner',
-      'Keeping stakeholder up to date and discussing new features'
-    ]
-  },
-  {
-    title: 'Angular application for document processing ·',
-    company: 'Novatec Consulting GmbH',
-    period: '02/2021 - 12/2022',
-    description: ' In the role of front-end lead, I was responsible for the development of a new Angular application. I was responsible for the architecture of the new app, as well as customizing the design according to customer requirements, connecting REST APIs and carrying out functional and technical tests to ensure the quality of the requirements. ',
-    technologies: ['Construction Sector', 'Angular', 'TypeScript', 'Jest', 'GitLab', 'Jenkins'],
-    achievements: [
-      'Integration of excel file uploads with automated transformation to application models',
-      'Build application from scatch',
-      'Designing the new application from scratch',
-      'Implemented CI/CD pipeline',
-    ]
-  },
-  {
-    title: 'Angular applications for contract management and visualization of vehicle data',
-    company: 'Novatec Consulting GmbH',
-    period: '10/2018 - 01/2021',
-    description: ' Planning and implementation of migrations and new developments. Development of several Angular applications with TypeScript and REST APIs with Kotlin and Java (Spring Boot). Implementation of functional and technical tests for quality assurance. ',
-    technologies: ['Automotive Sector', 'Angular', 'TypeScript', 'Jext', 'SpringBoot', 'Kotlin', 'Java', 'GitLab', 'Jenkins', 'Grafana'],
-    achievements: [
-      'Built multiple client applications from scratch'
-    ]
-  },
-  {
-    title: 'Bachelor of Science - Applied Computer Science',
-    company: 'DHBW Stuttgart / Novatec Consulting GmbH',
-    period: '10/2015 - 09/2018',
-    description: 'Practical bachelor degree program with a strong focus on software development and practical work in the company.',
-    technologies: ['Angular', 'TypeScript', 'Etherium', 'Bitcoing', 'Java', 'Kotlin', 'Jira', 'Confluence', 'Project Management'],
-    achievements: [
-      'Bachelor Thesis / Smart Contracts im Bereich E-Health - Datenaustausch zwischen Arzt und Patient'
-    ]
-  }
-];
 ---
 
 <section 
@@ -78,19 +28,19 @@ const experiences = [
       <div class="timeline-line" aria-hidden="true"></div>
       
       <div class="timeline-content">
-        {experiences.map((exp, index) => (
+        {(t('experience.projects', lang) as unknown as any[]).map((exp, index) => (
           <div 
             class={`timeline-item animate-fade-in-up ${index % 2 === 0 ? 'timeline-item--left' : 'timeline-item--right'}`}
             style={`animation-delay: ${index * 0.2}s`}
           >
             <div class="timeline-dot" aria-hidden="true"></div>
             <div class={`timeline-date ${index % 2 === 0 ? 'timeline-date--right' : 'timeline-date--left'}`}>
-              {exp.period}
+              {exp.duration}
             </div>
             <ExperienceCard
               title={exp.title}
               company={exp.company}
-              period={exp.period}
+              duration={exp.duration}
               description={exp.description}
               technologies={exp.technologies}
               achievements={exp.achievements}
@@ -103,7 +53,9 @@ const experiences = [
   </div>
 </section>
 
-<script is:inline>
+<script>
+  import { getTranslation } from "../../i18n";
+
   function initExperienceSection() {
     // Intersection Observer for scroll animations
     const observerOptions = {
@@ -126,20 +78,10 @@ const experiences = [
     });
     
     // Update content on language change
-    window.addEventListener('languageChange', (e) => {
+    window.addEventListener('languageChange', (e: any) => {
       const lang = e.detail;
-      const translations = {
-        en: {
-          title: 'Experience',
-          description: 'My professional journey and key projects that shaped my expertise in software development.'
-        },
-        de: {
-          title: 'Erfahrung',
-          description: 'Mein beruflicher Werdegang und wichtige Projekte, die meine Expertise in der Softwareentwicklung geprägt haben.'
-        }
-      };
       
-      const currentTranslations = translations[lang] || translations.en;
+      const currentTranslations = getTranslation(lang).experience
       
       const sectionTitle = document.getElementById('experience-title');
       const sectionDescription = document.querySelector('.experience-section .section-description');
@@ -149,9 +91,31 @@ const experiences = [
       
       // Update achievement titles
       const achievementTitles = document.querySelectorAll('.achievements-title');
-      const achievementText = lang === 'de' ? 'Wichtige Erfolge' : 'Key Achievements';
       achievementTitles.forEach(title => {
-        title.textContent = achievementText;
+        title.textContent =currentTranslations.keyAchievements
+      });
+
+      // Update proficiency cards
+      const timelineItems = document.querySelectorAll('.timeline-item');
+      
+      timelineItems.forEach((item, index) => {
+        
+        const timelineDate = item.querySelector('.timeline-date');
+        const title = item.querySelector('.experience-title');
+        const company = item.querySelector('.experience-company');
+        const duration = item.querySelector('.experience-duration');
+        const description = item.querySelector('.experience-description');
+        const achievementItems = item.querySelectorAll('.achievement-item');
+        
+        if (timelineDate) timelineDate.textContent = currentTranslations.projects[index].duration ?? null;
+        if (title) title.textContent = currentTranslations.projects[index].title ?? null
+        if (company) company.textContent = currentTranslations.projects[index].company ?? null
+        if (duration) duration.textContent = currentTranslations.projects[index].duration ?? null
+        if (description) description.textContent = currentTranslations.projects[index].description ?? null
+        
+        achievementItems.forEach((item, achievementIndex) => {
+          if (item) item.textContent = currentTranslations.projects[index]?.achievements[achievementIndex] ?? null;
+        });
       });
     });
   }

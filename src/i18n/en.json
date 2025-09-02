@@ -10,7 +10,7 @@
   "about": {
     "name": "Nico Foundas",
     "subtitle": "Freelance Senior Software Engineer",
-    "description": "Passionate software engineer with expertise in full-stack development, project management, and DevOps. I help businesses build scalable, modern applications and optimize their development processes.",
+    "description": "Hi I am Nico a passionate software engineer with more than 7 years of experience and a focus in frontend development and project management. I help businesses build scalable, modern applications and optimize their development processes. My expertise extends to understanding and defining complex algorithms and domain specific contexts as well as closely collaborating with other colleagues in an international team.",
     "imagePlaceholder": "Your Photo Here",
     "yearsExperience": "Years Experience",
     "projectsCompleted": "Projects Completed",
@@ -20,13 +20,13 @@
     "title": "Proficiencies",
     "development": {
       "title": "Development",
-      "description": "Full-stack development with modern technologies and best practices.",
-      "skills": ["JavaScript/TypeScript", "React/Vue/Angular", "Node.js", "Quality Assurance"]
+      "description": "Frontend development with modern technologies and best practices.",
+      "skills": ["ReactJS / Astro", "Frontend-rchitecture", "JavaScript / TypeScript", "Quality Assurance"]
     },
     "projectManagement": {
       "title": "Project Management",
       "description": "Agile methodologies and team leadership for successful project delivery.",
-      "skills": ["Scrum/Kanban", "Team Leadership", "Stakeholder Management", "Quality Assurance"]
+      "skills": ["Scrum/Kanban", "Team Leadership", "Stakeholder Management", "Requirements Management"]
     },
     "devOps": {
       "title": "DevOps",
@@ -67,34 +67,53 @@
   "experience": {
     "title": "Experience",
     "description": "My professional journey and key projects that shaped my expertise in software development.",
+    "keyAchievements": "Key Achievements",
     "projects": [
       {
-        "title": "E-Commerce Platform Modernization",
-        "company": "TechCorp Solutions",
-        "duration": "2023 - Present",
-        "description": "Led the complete modernization of a legacy e-commerce platform, migrating from monolithic architecture to microservices. Improved performance by 300% and reduced deployment time by 80%.",
-        "technologies": ["React", "Node.js", "Docker", "AWS", "MongoDB"]
+        "title": "Development of a ReactJs application for drawing and modifying roofs on 2D Canvases ·",
+        "company": "Paul Bauder Co & Kg",
+        "duration": "01/2022 - Present",
+        "description": "Using OpenLayers, my team and I have developed an application that is used to create interactive drawings in the area of building planning. I created complex algorithms for the automatic calculation of domain-specific functionalities and used current design standards to keep the web application accessible to the users. In addition to the professional and technical requirements review and the mentoring of less experienced colleagues, I took on the role of Product Owner for a period of 6 months and thus dedicated myself to the creation of requirements and project organization.",
+        "technologies": ["Construction Sector", "ReactJs", "TypeScript", "OpenLayers", "MateiraulUI", "Vitest", "Jest", "Playwright", "Azure DevOps", "SpringBoot", "Kotlin", "Docker", "PostgreSQL"],
+        "achievements": [
+          "Implementation of complex vector based algorithms",
+          "Ensured code quality by  adding unit, integration and visual regression tests",
+          "Leading the project in the role of product owner",
+          "Keeping stakeholder up to date and discussing new features"
+        ]
       },
       {
-        "title": "Financial Dashboard Application",
-        "company": "FinanceFlow Inc.",
-        "duration": "2022 - 2023",
-        "description": "Developed a real-time financial dashboard for portfolio management with advanced analytics and reporting features. Served over 10,000 active users.",
-        "technologies": ["Vue.js", "Python", "PostgreSQL", "Redis", "Kubernetes"]
+        "title": "Angular application for document processing ·",
+        "company": "Novatec Consulting GmbH",
+        "duration": "02/2021 - 12/2022",
+        "description": "In the role of front-end lead, I was responsible for the development of a new Angular application. I was responsible for the architecture of the new app, as well as customizing the design according to customer requirements, connecting REST APIs and carrying out functional and technical tests to ensure the quality of the requirements. ",
+        "technologies": ["Construction Sector", "Angular", "TypeScript", "Jest", "GitLab", "Jenkins"],
+        "achievements": [
+          "Integration of excel file uploads with automated transformation to application models",
+          "Build application from scatch",
+          "Designing the new application from scratch",
+          "Implemented CI/CD pipeline"
+        ]
       },
       {
-        "title": "Healthcare Management System",
-        "company": "MedTech Innovations",
-        "duration": "2021 - 2022",
-        "description": "Built a comprehensive healthcare management system with patient records, appointment scheduling, and billing integration. Ensured HIPAA compliance and data security.",
-        "technologies": ["Angular", "Java Spring", "MySQL", "Azure", "Docker"]
+        "title": "Angular applications for contract management and visualization of vehicle data",
+        "company": "Novatec Consulting GmbH",
+        "duration": "10/2018 - 01/2021",
+        "description": "Planning and implementation of migrations and new developments. Development of several Angular applications with TypeScript and REST APIs with Kotlin and Java (Spring Boot). Implementation of functional and technical tests for quality assurance. ",
+        "technologies": ["Automotive Sector", "Angular", "TypeScript", "Jext", "SpringBoot", "Kotlin", "Java", "GitLab", "Jenkins", "Grafana"],
+        "achievements": [
+          "Built multiple client applications from scratch"
+        ]
       },
       {
-        "title": "IoT Monitoring Platform",
-        "company": "SmartDevices Ltd.",
-        "duration": "2020 - 2021",
-        "description": "Created an IoT monitoring platform for industrial equipment with real-time data visualization and predictive maintenance alerts. Reduced downtime by 45%.",
-        "technologies": ["React", "Node.js", "InfluxDB", "Grafana", "MQTT"]
+       "title": "Bachelor of Science - Applied Computer Science",
+        "company": "DHBW Stuttgart / Novatec Consulting GmbH",
+        "duration": "10/2015 - 09/2018",
+        "description": "Practical bachelor degree program with a strong focus on software development and practical work in the company.",
+        "technologies": ["Angular", "TypeScript", "Etherium", "Bitcoing", "Java", "Kotlin", "Jira", "Confluence", "Project Management"],
+        "achievements": [
+          "Bachelor Thesis / Smart Contracts im Bereich E-Health - Datenaustausch zwischen Arzt und Patient"
+        ]
       }
     ]
   },

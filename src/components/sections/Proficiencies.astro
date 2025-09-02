@@ -65,51 +65,15 @@ const proficiencies = [
   </div>
 </section>
 
-<script is:inline>
+<script>
+  import { getTranslation } from "../../i18n";
+
   function initProficienciesSection() {
     // Update content on language change
-    window.addEventListener('languageChange', (e) => {
+    window.addEventListener('languageChange', (e: any) => {
       const lang = e.detail;
-      const translations = {
-        en: {
-          title: 'Proficiencies',
-          development: {
-            title: 'Development',
-            description: 'Frontend development with modern technologies and best practices.',
-            skills: ['ReactJS / Astro', 'Frontend-rchitecture', 'JavaScript / TypeScript', 'Quality Assurance']
-          },
-          projectManagement: {
-            title: 'Project Management',
-            description: 'Agile methodologies and team leadership for successful project delivery.',
-            skills: ['Scrum/Kanban', 'Team Leadership', 'Stakeholder Management', 'Requirements Management']
-          },
-          devOps: {
-            title: 'DevOps',
-            description: 'Infrastructure automation and continuous integration/deployment.',
-            skills: ['Azure DevOps', 'Docker', 'Kubernetes', 'CI/CD Pipelines']
-          }
-        },
-        de: {
-          title: 'Kompetenzen',
-          development: {
-            title: 'Entwicklung',
-            description: 'Frontend-Entwicklung mit modernen Technologien und bewährten Praktiken.',
-            skills: ['ReactJS / Astro', 'Frontend-Architektur', 'JavaScript / TypeScript', 'Qualitätssicherung']
-          },
-          projectManagement: {
-            title: 'Projektmanagement',
-            description: 'Agile Methoden und Teamführung für erfolgreiche Projektabwicklung.',
-            skills: ['Scrum/Kanban', 'Teamführung', 'Stakeholder-Management', 'Anforderungsmanagement']
-          },
-          devOps: {
-            title: 'DevOps',
-            description: 'Infrastruktur-Automatisierung und kontinuierliche Integration/Bereitstellung.',
-            skills: ['Azure DevOps', 'Docker', 'Kubernetes', 'CI/CD-Pipelines']
-          }
-        }
-      };
       
-      const currentTranslations = translations[lang] || translations.en;
+      const currentTranslations = getTranslation(lang).proficiencies
       
       // Update section title
       const sectionTitle = document.getElementById('proficiencies-title');

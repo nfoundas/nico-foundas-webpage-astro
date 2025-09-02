@@ -149,24 +149,26 @@ const { lang = 'en' } = Astro.props;
   </div>
 </section>
 
-<script is:inline>
+<script>
+  import { getTranslation  } from '../../i18n';
+
   function initContactSection() {
-    const form = document.getElementById('contact-form');
-    const submitButton = form?.querySelector('.submit-button');
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const submitButton = form?.querySelector('.submit-button') as HTMLButtonElement;
     const submitText = form?.querySelector('.submit-text');
     const formStatus = document.getElementById('form-status');
     
     if (!form || !submitButton || !submitText || !formStatus) return;
     
     // Form validation
-    function validateField(field) {
+    function validateField(field: any) {
       const value = field.value.trim();
       const errorElement = document.getElementById(`${field.name}-error`);
       let isValid = true;
       let errorMessage = '';
       
       // Clear previous error
-      errorElement.textContent = '';
+      if (errorElement) errorElement.textContent = '';
       field.classList.remove('error');
       
       // Required field validation
@@ -190,7 +192,7 @@ const { lang = 'en' } = Astro.props;
         isValid = false;
       }
       
-      if (!isValid) {
+      if (!isValid && errorElement) {
         errorElement.textContent = errorMessage;
         field.classList.add('error');
       }
@@ -199,10 +201,10 @@ const { lang = 'en' } = Astro.props;
     }
     
     function validateForm() {
-      const fields = form.querySelectorAll('input[required], textarea[required]');
+      const fields = form?.querySelectorAll('input[required], textarea[required]');
       let isFormValid = true;
       
-      fields.forEach(field => {
+      fields?.forEach(field => {
         if (!validateField(field)) {
           isFormValid = false;
         }
@@ -232,6 +234,7 @@ const { lang = 'en' } = Astro.props;
         return;
       }
       
+      console.log(submitButton)
       // Show loading state
       submitButton.disabled = true;
       submitText.textContent = 'Sending...';
@@ -264,40 +267,10 @@ const { lang = 'en' } = Astro.props;
     });
     
     // Update content on language change
-    window.addEventListener('languageChange', (e) => {
+    window.addEventListener('languageChange', (e: any) => {
       const lang = e.detail;
-      const translations = {
-        en: {
-          title: 'Contact',
-          description: 'Ready to start your next project? Let\'s discuss how I can help bring your ideas to life.',
-          getInTouch: 'Get in Touch',
-          infoText: 'I\'m always interested in new opportunities and exciting projects. Feel free to reach out!',
-          email: 'Email',
-          phone: 'Phone',
-          form: {
-            name: 'Your Name',
-            email: 'Email Address',
-            message: 'Your Message',
-            submit: 'Send Message'
-          }
-        },
-        de: {
-          title: 'Kontakt',
-          description: 'Bereit für Ihr nächstes Projekt? Lassen Sie uns besprechen, wie ich Ihnen helfen kann, Ihre Ideen zum Leben zu erwecken.',
-          getInTouch: 'Kontakt aufnehmen',
-          infoText: 'Ich bin immer an neuen Möglichkeiten und spannenden Projekten interessiert. Zögern Sie nicht, mich zu kontaktieren!',
-          email: 'E-Mail',
-          phone: 'Telefon',
-          form: {
-            name: 'Ihr Name',
-            email: 'E-Mail-Adresse',
-            message: 'Ihre Nachricht',
-            submit: 'Nachricht senden'
-          }
-        }
-      };
       
-      const currentTranslations = translations[lang] || translations.en;
+      const currentTranslations = getTranslation(lang).contact
       
       // Update section content
       const sectionTitle = document.getElementById('contact-title');
@@ -335,7 +308,7 @@ const { lang = 'en' } = Astro.props;
       }
       
       // Update submit button
-      if (submitText && !submitButton.disabled) {
+      if (submitText) {
         submitText.textContent = currentTranslations.form.submit;
       }
     });
