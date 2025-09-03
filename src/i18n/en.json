@@ -149,7 +149,7 @@
       },
       "vatId": {
         "title": "VAT-ID", 
-        "content": "Sales tax identification number in accordance with §27 a of the Sales Tax Act:\nabc123"
+        "content": "Sales tax identification number in accordance with §27 a of the Sales Tax Act:\n-"
       },
       "jobDescriptionAndRegulations": {
         "title": "Job Title And Professional Regulations", 

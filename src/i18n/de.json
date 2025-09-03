@@ -149,7 +149,7 @@
       },
       "vatId": {
         "title": "Umsatzsteuer-ID", 
-        "content": "Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:\nabc123"
+        "content": "Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:\n-"
       },
       "jobDescriptionAndRegulations": {
         "title": "Berufsbezeichnung und berufsrechtliche Regelungen", 
