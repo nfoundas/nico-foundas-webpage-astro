@@ -16,21 +16,21 @@ const t = getTranslation(lang);
 <div id="legal-modal" class="modal-overlay" aria-hidden="true">
   <div class="modal-container" role="dialog" aria-labelledby="modal-title" aria-modal="true">
     <div class="modal-header">
-      <h2 id="modal-title" class="modal-title">Legal Information</h2>
-      <button 
-        type="button" 
-        class="modal-close" 
-        aria-label={t.legalModal.close}
-        data-close-modal
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-    
-    <div class="modal-body">
+      <div class="modal-header-content">
+        <h2 id="modal-title" class="modal-title">Legal Information</h2>
+        <button 
+          type="button" 
+          class="modal-close" 
+          aria-label={t.legalModal.close}
+          data-close-modal
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
       <div class="tab-navigation" role="tablist" aria-label="Legal information tabs">
         <button 
           type="button" 
@@ -61,7 +61,7 @@ const t = getTranslation(lang);
           data-tab="cookies"
         >
           {t.legalModal.cookies.title}
-        </button>
+        </button> -->
         <button 
           type="button" 
           class="tab-button" 
@@ -71,14 +71,17 @@ const t = getTranslation(lang);
           data-tab="terms"
         >
           {t.legalModal.terms.title}
-        </button> -->
+        </button>
       </div>
+    </div>
+    
+    <div class="modal-body">
       
       <div class="tab-content">
         <ImprintTab lang={lang} />
         <!-- <PrivacyTab lang={lang} />
-        <CookiesTab lang={lang} />
-        <TermsTab lang={lang} /> -->
+        <CookiesTab lang={lang} /> -->
+        <TermsTab lang={lang} />
       </div>
     </div>
   </div>
@@ -122,8 +125,15 @@ const t = getTranslation(lang);
   .modal-overlay.active .modal-container {
     transform: scale(1) translateY(0);
   }
-  
+
   .modal-header {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-background);
+  }
+
+  .modal-header-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -439,13 +449,6 @@ const t = getTranslation(lang);
         const isActive = panel.id === `${tabName}-panel`;
         panel.classList.toggle('active', isActive);
       });
-      
-      // Update modal title
-      const modalTitle = this.modal.querySelector('.modal-title');
-      const activeButton = this.modal.querySelector(`[data-tab="${tabName}"]`);
-      if (modalTitle && activeButton) {
-        modalTitle.textContent = activeButton.textContent || 'Legal Information';
-      }
     }
     
     private isOpen(): boolean {

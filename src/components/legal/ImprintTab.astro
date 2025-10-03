@@ -25,10 +25,10 @@ const { lang = 'en' } = Astro.props;
     {t('legalModal.imprint.contact.content', lang)}
   </p>
 
-  <h3 id="vatId-title">
+  <h3 id="taxId-title">
     {t('legalModal.imprint.contact.content', lang)}
   </h3>
-  <p id="vatId-content">
+  <p id="taxId-content">
     {t('legalModal.imprint.contact.content', lang)}
   </p>
 
@@ -63,8 +63,8 @@ const { lang = 'en' } = Astro.props;
       const legalAdress = document.getElementById('legal-adress');
       const contactTitle = document.getElementById('contact-title');
       const contactContent = document.getElementById('contact-content');
-      const vatIdTitle = document.getElementById('vatId-title');
-      const vatIdContent = document.getElementById('vatId-content');
+      const taxIdTitle = document.getElementById('taxId-title');
+      const taxIdContent = document.getElementById('taxId-content');
       const jobDescriptionTitle = document.getElementById('job-description-title');
       const jobDescriptionContent = document.getElementById('job-description-content');
       const jobAwardedInContent = document.getElementById('job-awarded-in');
@@ -75,8 +75,8 @@ const { lang = 'en' } = Astro.props;
       if (legalAdress) legalAdress.textContent = currentTranslations.legalAdress;
       if (contactTitle) contactTitle.textContent = currentTranslations.contact.title;
       if (contactContent) contactContent.textContent = currentTranslations.contact.content;
-      if (vatIdTitle) vatIdTitle.textContent = currentTranslations.vatId.title;
-      if (vatIdContent) vatIdContent.textContent = currentTranslations.vatId.content;
+      if (taxIdTitle) taxIdTitle.textContent = currentTranslations.taxId.title;
+      if (taxIdContent) taxIdContent.textContent = currentTranslations.taxId.content;
       if (jobDescriptionTitle) jobDescriptionTitle.textContent = currentTranslations.jobDescriptionAndRegulations.title;
       if (jobDescriptionContent) jobDescriptionContent.textContent = currentTranslations.jobDescriptionAndRegulations.jobDescription;
       if (jobAwardedInContent) jobAwardedInContent.textContent = currentTranslations.jobDescriptionAndRegulations.awardedIn;

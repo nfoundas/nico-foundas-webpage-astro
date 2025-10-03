@@ -147,9 +147,9 @@
         "title": "Contact", 
         "content": "Mobile: +49 1575 4282874\nE-Mail: nico@foundas.de"
       },
-      "vatId": {
-        "title": "VAT-ID", 
-        "content": "Sales tax identification number in accordance with §27 a of the Sales Tax Act:\n-"
+      "taxId": {
+        "title": "Tax number", 
+        "content": "Tax number:\n37178/21455"
       },
       "jobDescriptionAndRegulations": {
         "title": "Job Title And Professional Regulations", 
