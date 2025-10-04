@@ -1,9 +1,8 @@
 ---
 import { getTranslation } from '../../i18n/index.ts';
 import ImprintTab from '../legal/ImprintTab.astro';
-import PrivacyTab from '../legal/PrivacyTab.astro';
-import CookiesTab from '../legal/CookiesTab.astro';
 import TermsTab from '../legal/TermsTab.astro';
+import CancellationPolicy from '../legal/CancellationPolicy.astro';
 
 interface Props {
   lang: 'en' | 'de';
@@ -72,6 +71,16 @@ const t = getTranslation(lang);
         >
           {t.legalModal.terms.title}
         </button>
+        <button 
+          type="button" 
+          class="tab-button" 
+          role="tab" 
+          aria-selected="false" 
+          aria-controls="cancellation-policy-panel"
+          data-tab="cancellation-policy"
+        >
+          {t.legalModal.cancellationPolicy.title}
+        </button>
       </div>
     </div>
     
@@ -82,6 +91,7 @@ const t = getTranslation(lang);
         <!-- <PrivacyTab lang={lang} />
         <CookiesTab lang={lang} /> -->
         <TermsTab lang={lang} />
+        <CancellationPolicy lang={lang} />
       </div>
     </div>
   </div>

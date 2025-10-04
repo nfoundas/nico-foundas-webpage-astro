@@ -1,0 +1,96 @@
+---
+import { getTranslation } from '../../i18n/index.ts';
+
+interface Props {
+  lang: 'en' | 'de';
+}
+
+const { lang } = Astro.props;
+const t = getTranslation(lang);
+---
+
+<div 
+  id="cancellation-policy-panel" 
+  class="tab-panel" 
+  role="tabpanel" 
+  aria-labelledby="cancellation-policy-tab"
+>
+  <h3>{t.legalModal.cancellationPolicy.title}</h3>
+
+  <p>Sie haben das Recht, binnen <strong>14 Tagen</strong> ohne Angabe von Gründen diesen Vertrag zu widerrufen.</p>
+
+  <p>Die Widerrufsfrist beträgt 14 Tage ab dem Tag des Vertragsabschlusses.</p>
+
+  <p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns:</p>
+
+  <p>
+    <strong>
+      Nico Foundas<br>
+      Main-Neckar-Bahn-Str. 23<br>
+      68229 Mannheim<br>
+      nico@foundas.de
+    </strong>
+  </p>
+
+  <p>mittels einer eindeutigen Erklärung (z. B. ein mit der Post versandter Brief oder eine E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. </p>
+  
+  <p>Sie können dafür das beigefügte Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist.</p>
+
+  <p>Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden.</p>
+
+  <h4>Folgen des Widerrufs</h4>
+  <p>Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, unverzüglich und spätestens binnen <strong>14 Tagen</strong>> ab dem Tag zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist.</p>
+
+  <p>Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart. In keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet.</p>
+
+  <p>Haben Sie verlangt, dass die Dienstleistungen während der Widerrufsfrist beginnen sollen, so haben Sie uns einen angemessenen Betrag zu zahlen, der dem Anteil der bis zu dem Zeitpunkt, zu dem Sie uns von der Ausübung des Widerrufsrechts hinsichtlich dieses Vertrags unterrichten, bereits erbrachten Dienstleistungen im Vergleich zum Gesamtumfang der im Vertrag vorgesehenen Dienstleistungen entspricht.</p>
+</div>
+
+<style>
+  .tab-panel {
+    display: none;
+  }
+  
+  .tab-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .tab-panel h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+    font-size: 1.25rem;
+  }
+  
+  .tab-panel p {
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .tab-panel h3 {
+      font-size: 1.1rem;
+    }
+  }
+  
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .tab-panel {
+      animation: none;
+    }
+  }
+</style>

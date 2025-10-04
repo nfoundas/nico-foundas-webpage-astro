@@ -161,8 +161,8 @@
         "content": "We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board."
       }
     },
-    "privacy": {
-      "title": "Privacy Policy",
+    "cancellationPolicy": {
+      "title": "Cancellation Policy",
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris viverra veniam sit amet lacus cursus de sagittis. Praesent congue erat at massa. Sed cursus turpis a purus aliquam et tempus lorem vehicula."
     },
     "cookies": {

@@ -161,7 +161,11 @@
         "content": "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
       }
     },
-    "privacy": {
+    "cancellationPolicy": {
+      "title": "Widerrufsbelehrung für Verbraucher",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris viverra veniam sit amet lacus cursus de sagittis. Praesent congue erat at massa. Sed cursus turpis a purus aliquam et tempus lorem vehicula."
+    },
+    "privacyPolicy": {
       "title": "Datenschutzerklärung",
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris viverra veniam sit amet lacus cursus de sagittis. Praesent congue erat at massa. Sed cursus turpis a purus aliquam et tempus lorem vehicula."
     },
