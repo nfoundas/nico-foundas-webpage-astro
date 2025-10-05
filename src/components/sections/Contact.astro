@@ -1,6 +1,7 @@
 ---
 import Icon from '../ui/Icon.astro';
 import { t } from '../../i18n';
+import Button from '../ui/Button.astro';
 
 export interface Props {
   lang?: 'de' | 'en';
@@ -72,13 +73,30 @@ const { lang = 'de' } = Astro.props;
               </a>
             </div>
           </div>
+
+          <div class="contact-method scroll-fade">
+            <div class="contact-method-icon">
+              <Icon name="xing" size="md" ariaLabel="Xing" />
+            </div>
+            <div class="contact-method-content">
+              <h4 class="contact-method-title">Xing</h4>
+              <a 
+                href="https://www.xing.com/profile/Nico_Foundas" 
+                class="contact-method-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                xing.com/profile/Nico_Foundas
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-      
+
       <div class="contact-form-container scroll-fade-right">
-        <form action="../contact/actions/send-email" class="contact-form" id="contact-form" novalidate>
+        <form action="/actions/send-email" method="POST" class="contact-form" id="contact-form">
           <div class="form-group">
-            <label for="name" class="form-label">
+            <label for="name" class="form-label form-name">
               {t('contact.form.name', lang)}
               <span class="required" aria-label="required">*</span>
             </label>
@@ -95,7 +113,7 @@ const { lang = 'de' } = Astro.props;
           </div>
           
           <div class="form-group">
-            <label for="email" class="form-label">
+            <label for="email" class="form-label form-email">
               {t('contact.form.email', lang)}
               <span class="required" aria-label="required">*</span>
             </label>
@@ -112,7 +130,7 @@ const { lang = 'de' } = Astro.props;
           </div>
           
           <div class="form-group">
-            <label for="message" class="form-label">
+            <label for="message" class="form-label form-message">
               {t('contact.form.message', lang)}
               <span class="required" aria-label="required">*</span>
             </label>
@@ -275,12 +293,20 @@ const { lang = 'de' } = Astro.props;
       const sectionDescription = document.querySelector('.contact-section .section-description');
       const contactInfoTitle = document.querySelector('.contact-info-title');
       const contactInfoText = document.querySelector('.contact-info-text');
+      const formLabel = document.querySelector('.form-name');
+      const formEmail = document.querySelector('.form-email');
+      const formMessage = document.querySelector('.form-message');
+      const submitText = document.querySelector('.submit-text');
       
       console.log({sectionDescription,contactInfoTitle,contactInfoText})
       if (sectionTitle) sectionTitle.textContent = currentTranslations.title;
       if (sectionDescription) sectionDescription.textContent = currentTranslations.description;
       if (contactInfoTitle) contactInfoTitle.textContent = currentTranslations.getInTouch;
       if (contactInfoText) contactInfoText.textContent = currentTranslations.infoText;
+      if (formLabel) formLabel.textContent = currentTranslations.form.name;
+      if (formEmail) formEmail.textContent = currentTranslations.form.email;
+      if (formMessage) formMessage.textContent = currentTranslations.form.message;
+      if (submitText) submitText.textContent = currentTranslations.form.submit;
       
       // Update contact method titles
       const methodTitles = document.querySelectorAll('.contact-method-title');
@@ -290,26 +316,6 @@ const { lang = 'de' } = Astro.props;
           title.textContent = methodTexts[index];
         }
       });
-      
-      // // Update form labels
-      // const nameLabel = document.querySelector('label[for="name"]');
-      // const emailLabel = document.querySelector('label[for="email"]');
-      // const messageLabel = document.querySelector('label[for="message"]');
-      
-      // if (nameLabel) {
-      //   nameLabel.innerHTML = `${currentTranslations.form.name} <span class="required" aria-label="required">*</span>`;
-      // }
-      // if (emailLabel) {
-      //   emailLabel.innerHTML = `${currentTranslations.form.email} <span class="required" aria-label="required">*</span>`;
-      // }
-      // if (messageLabel) {
-      //   messageLabel.innerHTML = `${currentTranslations.form.message} <span class="required" aria-label="required">*</span>`;
-      // }
-      
-      // // Update submit button
-      // if (submitText) {
-      //   submitText.textContent = currentTranslations.form.submit;
-      // }
     });
   }
   
