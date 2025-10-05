@@ -9,9 +9,9 @@ import Contact from '../components/sections/Contact.astro';
 import Footer from '../components/layout/Footer.astro';
 import LegalModal from '../components/ui/LegalModal.astro';
 
-// Get language from URL params or default to 'en'
+// Get language from URL params or default to 'de'
 const url = new URL(Astro.request.url);
-const lang = (url.searchParams.get('lang') as 'en' | 'de') || 'en';
+const lang = (url.searchParams.get('lang') as 'de' | 'en') || 'de';
 
 // Page metadata
 const title = lang === 'de' ? 'Nico Foundas - Freiberuflicher Senior Software Engineer' : 'Nico Foundas - Freelance Senior Software Engineer';
@@ -85,7 +85,7 @@ const description = lang === 'de'
     const urlParams = new URLSearchParams(window.location.search);
     const urlLang = urlParams.get('lang');
     
-    if (urlLang && (urlLang === 'en' || urlLang === 'de')) {
+    if (urlLang && (urlLang === 'de' || urlLang === 'en')) {
       // Dispatch language change event for components
       window.dispatchEvent(new CustomEvent('languageChange', { 
         detail: urlLang 

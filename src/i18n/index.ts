@@ -1,19 +1,19 @@
-import en from './en.json';
 import de from './de.json';
+import en from './en.json';
 
-export type Language = 'en' | 'de';
+export type Language = 'de' | 'en';
 
 export const languages = {
-  en: 'English',
-  de: 'Deutsch'
+  de: 'Deutsch',
+  en: 'English'
 };
 
 export const translations = {
-  en,
-  de
+  de,
+  en
 };
 
-export const defaultLanguage: Language = 'en';
+export const defaultLanguage: Language = 'de';
 
 export function getTranslation(lang: Language = defaultLanguage) {
   return translations[lang] || translations[defaultLanguage];

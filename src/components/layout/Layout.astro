@@ -5,13 +5,13 @@ import SkipLink from './SkipLink.astro';
 export interface Props {
   title: string;
   description?: string;
-  lang?: 'en' | 'de';
+  lang?: 'de' | 'en';
 }
 
 const { 
   title, 
   description = 'Freelance Senior Software Engineer - Full-stack development, project management, and DevOps expertise',
-  lang = 'en'
+  lang = 'de'
 } = Astro.props;
 ---
 
@@ -51,9 +51,9 @@ const {
       function initializeLanguage() {
         const stored = localStorage.getItem('language');
         const browserLang = navigator.language.split('-')[0];
-        const supportedLangs = ['en', 'de'];
+        const supportedLangs = ['de', 'en'];
         
-        let currentLang = 'en';
+        let currentLang = 'de';
         if (stored && supportedLangs.includes(stored)) {
           currentLang = stored;
         } else if (supportedLangs.includes(browserLang)) {
@@ -67,7 +67,7 @@ const {
         updateTranslations(currentLang);
       }
       
-      function updateTranslations(lang) {
+      function updateTranslations(lang: string) {
         // This will be handled by the language switcher component
         window.dispatchEvent(new CustomEvent('languageChange', { detail: lang }));
       }

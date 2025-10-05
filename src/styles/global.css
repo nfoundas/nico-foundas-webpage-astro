@@ -268,7 +268,7 @@ p {
 .scroll-fade {
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .scroll-fade.visible {
@@ -279,7 +279,7 @@ p {
 .scroll-fade-left {
   opacity: 0;
   transform: translateX(-30px);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .scroll-fade-left.visible {
@@ -290,7 +290,7 @@ p {
 .scroll-fade-right {
   opacity: 0;
   transform: translateX(30px);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .scroll-fade-right.visible {

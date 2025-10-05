@@ -5,12 +5,12 @@ import Card from '../ui/Card.astro';
 import Icon from '../ui/Icon.astro';
 
 export interface Props {
-  lang?: 'en' | 'de';
+  lang?: 'de' | 'en';
 }
 
-const { lang = 'en' } = Astro.props;
+const { lang = 'de' } = Astro.props;
 
-const getSkillsArray = (key: string, lang: 'en' | 'de'): string[] => {
+const getSkillsArray = (key: string, lang: 'de' | 'en'): string[] => {
   const skills = t(key, lang);
   return Array.isArray(skills) ? skills : [];
 };
