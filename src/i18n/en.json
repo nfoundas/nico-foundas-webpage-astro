@@ -21,7 +21,7 @@
     "development": {
       "title": "Development",
       "description": "Frontend development with modern technologies and best practices.",
-      "skills": ["ReactJS / Astro", "Frontend-rchitecture", "JavaScript / TypeScript", "Quality Assurance"]
+      "skills": ["ReactJS", "Astro", "Frontend-Architecture", "JavaScript / TypeScript", "Spring Boot", "Kotlin", "Flutter", "Quality Assurance"]
     },
     "projectManagement": {
       "title": "Project Management",

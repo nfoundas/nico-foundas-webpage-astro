@@ -1,6 +1,8 @@
 ---
 import ProficiencyCard from '../proficiencies/ProficiencyCard.astro';
 import { t } from '../../i18n';
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
 
 export interface Props {
   lang?: 'en' | 'de';
@@ -18,7 +20,8 @@ const proficiencies = [
     title: t('proficiencies.development.title', lang),
     description: t('proficiencies.development.description', lang),
     skills: getSkillsArray('proficiencies.development.skills', lang),
-    icon: 'code'
+    icon: 'code',
+    class: 'code-skills'
   },
   {
     title: t('proficiencies.projectManagement.title', lang),
@@ -46,8 +49,8 @@ const proficiencies = [
         {t('proficiencies.title', lang)}
       </h2>
     </div>
-    
-    <div class="proficiencies-grid">
+
+    <Card class={`proficiency-card`}>
       {proficiencies.map((proficiency, index) => (
         <div 
           class="proficiency-item animate-fade-in-up"
@@ -61,7 +64,7 @@ const proficiencies = [
           />
         </div>
       ))}
-    </div>
+    </Card>
   </div>
 </section>
 
@@ -160,20 +163,19 @@ const proficiencies = [
   /* Grid responsive breakpoints */
   @media (min-width: 768px) {
     .proficiencies-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(1, 1fr);
       gap: 2.5rem;
     }
     
     .proficiency-item:nth-child(3) {
       grid-column: 1 / -1;
-      max-width: 500px;
       margin: 0 auto;
     }
   }
   
   @media (min-width: 1024px) {
     .proficiencies-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 3rem;
     }
     
