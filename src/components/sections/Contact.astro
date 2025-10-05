@@ -72,27 +72,10 @@ const { lang = 'de' } = Astro.props;
               </a>
             </div>
           </div>
-          
-          <div class="contact-method scroll-fade">
-            <div class="contact-method-icon">
-              <Icon name="xing" size="md" ariaLabel="Xing" />
-            </div>
-            <div class="contact-method-content">
-              <h4 class="contact-method-title">Xing</h4>
-              <a 
-                href="https://www.xing.com/profile/Nico_Foundas" 
-                class="contact-method-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                xing.com/profile/Nico_Foundas
-              </a>
-            </div>
-          </div>
         </div>
       </div>
       
-      <!-- <div class="contact-form-container scroll-fade-right">
+      <div class="contact-form-container scroll-fade-right">
         <form action="../contact/actions/send-email" class="contact-form" id="contact-form" novalidate>
           <div class="form-group">
             <label for="name" class="form-label">
@@ -160,7 +143,7 @@ const { lang = 'de' } = Astro.props;
             <div id="form-status" class="form-status" role="alert" aria-live="polite"></div>
           </div>
         </form>
-      </div> -->
+      </div>
     </div>
   </div>
 </section>
@@ -403,14 +386,12 @@ const { lang = 'de' } = Astro.props;
   
   .contact-methods {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 1.5rem;
   }
   
   .contact-method {
     display: flex;
-    min-width: 45%;
     align-items: center;
     gap: 1rem;
   }
@@ -561,7 +542,7 @@ const { lang = 'de' } = Astro.props;
   /* Desktop layout */
   @media (min-width: 768px) {
     .contact-content {
-      /* grid-template-columns: 1fr 1.2fr; */
+      grid-template-columns: 1fr 1.2fr;
       gap: 4rem;
     }
     
@@ -585,29 +566,15 @@ const { lang = 'de' } = Astro.props;
     .contact-form-container {
       padding: 1.5rem;
     }
-
-
-    .contact-methods {
-      flex-direction: column;
-    }
     
     .contact-method {
-      display: flex;
-      min-width: 45%;
-      align-items: center;
+      flex-direction: column;
+      text-align: center;
       gap: 0.75rem;
     }
     
     .contact-method-link {
       word-break: break-word;
-    }
-  }
-
-  /* Mobile adjustments */
-  @media (max-width: 400px) {    
-    .contact-method {
-      flex-direction: column;
-      text-align: center;
     }
   }
   
