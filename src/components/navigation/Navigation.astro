@@ -147,13 +147,14 @@ const navItems = [
   document.addEventListener('DOMContentLoaded', initNavigation);
 </script>
 
+
 <style>
   .navigation {
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(253, 245, 230, 0.95);
+    background: var(--color-accent);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--color-border);
     z-index: 100;
@@ -176,7 +177,7 @@ const navItems = [
   
   .brand-text {
     text-decoration: none;
-    color: var(--color-focus);
+    color: var(--color-text-primary);
     font-weight: 700;
     font-size: 1.25rem;
     transition: color 0.2s ease;
